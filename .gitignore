@@ -1,3 +1,5 @@
 .DS_Store
 frontend/node_modules
+frontend/ios
+frontend/android
 server/node_modules
