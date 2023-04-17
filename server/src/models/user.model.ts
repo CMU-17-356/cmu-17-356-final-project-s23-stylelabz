@@ -4,11 +4,9 @@ import mongoose from 'mongoose';
 // 1. Create an interface representing a document in MongoDB.
 interface UserInterface{
     username: string,
-    name :{
-        first_name: string,
-        second_name: string,
-        last_name : string
-    },
+    password: string,
+    first_name: string,
+    last_name : string,
     gender: string,
     DOB: Date,
     email: string,
@@ -16,15 +14,12 @@ interface UserInterface{
 
 // 2. Create a Schema corresponding to the document interface.
 const UserSchema = new Schema<UserInterface>({
-    username :{ type: String, required: true },
-    name : {
-        first_name: {type:String, required :true},
-        second_name: String,
-        last_name : {type:String,}
-    },
-    gender: {type: String , enum : ['Male','Female']},
-    DOB: Date,
-    email: {type: String,},
+    username: { type: String, required: true },
+    first_name: { type:String, required: true },
+    last_name : { type:String, required: true },
+    gender: { type: String , enum : ['M','F'] },
+    DOB: { type: Date, required: true },
+    email: { type: String, required: false},
 });
 
 // 3. Create a Model.
