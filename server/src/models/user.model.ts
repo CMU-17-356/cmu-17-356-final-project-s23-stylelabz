@@ -1,4 +1,4 @@
-import { Schema} from 'mongoose';
+import { Schema } from 'mongoose';
 import mongoose from 'mongoose';
 
 // 1. Create an interface representing a document in MongoDB.
