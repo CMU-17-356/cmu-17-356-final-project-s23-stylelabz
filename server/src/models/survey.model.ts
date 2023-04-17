@@ -1,19 +1,24 @@
-import { Schema} from 'mongoose';
+import { Schema } from 'mongoose';
 import mongoose from 'mongoose';
 
 // 1. Create an interface representing a document in MongoDB.
-interface SurveyInterface{
-    questionSerialNo: number,
-    questionCategory: string
-    questionText: string,
+interface SurveyQuestion {
+    id: number,
+    category: string,
+    text: string
+}
+export interface Survey {
+    questions: [SurveyQuestion]
 }
 
 // 2. Create a Schema corresponding to the document interface.
-const SurveySchema = new Schema<SurveyInterface>({
-    questionSerialNo :{ type: Number, required: true },
-    questionCategory: {type: String , enum : ['Style','ColorFamily', 'Price']},
-    questionText: {type: String,},
+export const SurveySchema = new Schema<Survey>({
+    questions: [{
+        id: { type: Number, required: true },
+        category: { type: String, enum: ['style', 'color_family', 'price'] },
+        text: { type: String, required: true }
+    }]
 });
 
 // 3. Create a Model.
-export const Survey = mongoose.model('Survey', SurveySchema);
+export const SurveyModel = mongoose.model('Survey', SurveySchema); 
