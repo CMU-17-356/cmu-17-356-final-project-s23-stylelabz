@@ -1,0 +1,58 @@
+openapi: '3.0.2'
+info:
+  title: StyleLabz API
+  version: '1.0'
+servers:
+  - url: https://api.server.test/v1
+paths:
+  /users:
+    post:
+      responses:
+        '201':
+          description: created
+  /users/{userId}:
+    parameters:
+      - in: path
+        name: userId
+        schema:
+          type: string
+        required: true
+    get:
+      responses:
+        200:
+          description: ok
+        404:
+          description: not found
+  /survey/{userId}:
+    parameters:
+      - in: path
+        name: userId
+        schema:
+          type: string
+        required: true
+    post:
+      requestBody:
+        required: true
+        content: 
+          application/json:
+            schema:
+              '#/components/schemas/survey'
+
+      responses:
+        '201':
+          description: created
+        '400':
+          description: bad request
+  /preferences/{userId}:
+    get:
+      responses:
+        200:
+          description: ok
+        404:
+          description: not found
+    post:
+      responses:
+        204:
+          description: no content
+        404:
+          description: not found
