@@ -1,14 +1,14 @@
-#Sun Apr 09 01:00:42 EDT 2023
-base.0=/Users/shashankshekhar/Desktop/Assignments/Spring/cmu-17-356-final-project-s23-stylelabz/frontend/android/app/build/intermediates/dex/debug/mergeExtDexDebug/classes.dex
-base.1=/Users/shashankshekhar/Desktop/Assignments/Spring/cmu-17-356-final-project-s23-stylelabz/frontend/android/app/build/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex
-base.2=/Users/shashankshekhar/Desktop/Assignments/Spring/cmu-17-356-final-project-s23-stylelabz/frontend/android/app/build/intermediates/dex/debug/mergeProjectDexDebug/14/classes.dex
-base.3=/Users/shashankshekhar/Desktop/Assignments/Spring/cmu-17-356-final-project-s23-stylelabz/frontend/android/app/build/intermediates/dex/debug/mergeProjectDexDebug/7/classes.dex
-base.4=/Users/shashankshekhar/Desktop/Assignments/Spring/cmu-17-356-final-project-s23-stylelabz/frontend/android/app/build/intermediates/dex/debug/mergeLibDexDebug/0/classes.dex
+#Mon Apr 17 19:34:21 EDT 2023
+base.0=/Users/nathan/Desktop/17-356/cmu-17-356-final-project-s23-stylelabz/frontend/android/app/build/intermediates/dex/debug/mergeExtDexDebug/classes.dex
+base.1=/Users/nathan/Desktop/17-356/cmu-17-356-final-project-s23-stylelabz/frontend/android/app/build/intermediates/dex/debug/mergeLibDexDebug/0/classes.dex
+base.2=/Users/nathan/Desktop/17-356/cmu-17-356-final-project-s23-stylelabz/frontend/android/app/build/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex
+base.3=/Users/nathan/Desktop/17-356/cmu-17-356-final-project-s23-stylelabz/frontend/android/app/build/intermediates/dex/debug/mergeProjectDexDebug/14/classes.dex
+base.4=/Users/nathan/Desktop/17-356/cmu-17-356-final-project-s23-stylelabz/frontend/android/app/build/intermediates/dex/debug/mergeProjectDexDebug/7/classes.dex
 path.0=classes.dex
 path.1=0/classes.dex
-path.2=14/classes.dex
-path.3=7/classes.dex
-path.4=0/classes.dex
+path.2=0/classes.dex
+path.3=14/classes.dex
+path.4=7/classes.dex
 renamed.0=classes.dex
 renamed.1=classes2.dex
 renamed.2=classes3.dex
