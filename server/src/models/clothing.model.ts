@@ -7,6 +7,8 @@ export interface Clothing {
     pattern: string,
     sizes: [string],
     color: string,
+    colorScheme: [string],
+    colorPalette: [string],
     price: number,
     link: string
 }
@@ -17,7 +19,7 @@ export const ClothingSchema = new Schema<Clothing>({
         type: String,
         required: true,
         enum: ['activewear', 'blazers', 'coats', 'denim', 'jackets', 'jeans', 'knitwear', 'pants',
-            'polo shirts', 'shirts', 'shorts', 'suits', 'tshirts', 'other']
+            'poloShirts', 'shirts', 'shorts', 'suits', 'tshirts', 'other']
     },
     pattern: { 
         type: String, 
@@ -32,6 +34,17 @@ export const ClothingSchema = new Schema<Clothing>({
         }],
     },
     color: { type: String, },
+    colorScheme:[{
+        type: String,
+        required: true,
+        enum: ['Gray Family', 'Pink Family', 'Blue Family', 'Purple Family',
+            'Red Family', 'Yellow Family', 'Orange Family']
+    }],
+    colorPalette:[{
+        type: String,
+        required: true,
+        enum: ['Pastel', 'Dark', 'Bright', 'Gold', 'Summer', 'Teal', 'Neutral']
+    }],
     price: { type: Number, },
     link: { type: String, required: true, }
 });
