@@ -42,7 +42,7 @@ function App(): JSX.Element {
             />
             <RootStack.Screen name="Registration" component={Registration} />
             <RootStack.Screen name="Survey" component={SurveyScreen} />
-            <RootStack.Screen name="UserHome" component={UserHome} />
+            <RootStack.Screen name="UserHome" component={UserHome} options={{headerShown: false}}/>
           </RootStack.Navigator>
         </NavigationContainer>
   );

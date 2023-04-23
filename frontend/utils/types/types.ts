@@ -11,5 +11,16 @@ export type RootStackParamList = {
   UserHome: undefined;
 };
 
+export interface Clothing {
+  type: string,
+  pattern: string,
+  sizes: [string],
+  color: string,
+  colorScheme: [string],
+  colorPalette: [string],
+  price: number,
+  link: string
+}
+
 
 
