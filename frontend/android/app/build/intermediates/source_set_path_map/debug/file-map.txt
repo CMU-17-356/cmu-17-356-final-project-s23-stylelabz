@@ -7,11 +7,11 @@ com.nativefrontend.app-lifecycle-viewmodel-2.3.1-5 /Users/shashankshekhar/.gradl
 com.nativefrontend.app-jetified-emoji2-1.0.0-6 /Users/shashankshekhar/.gradle/caches/transforms-3/30102b16e64b2b966e993f978f0d77f3/transformed/jetified-emoji2-1.0.0/res
 com.nativefrontend.app-jetified-drawee-2.6.0-7 /Users/shashankshekhar/.gradle/caches/transforms-3/30e8f89a0cfe46affab114e7ab660cf3/transformed/jetified-drawee-2.6.0/res
 com.nativefrontend.app-lifecycle-runtime-2.4.0-8 /Users/shashankshekhar/.gradle/caches/transforms-3/384373dfdc1c875b0658779e880f6a49/transformed/lifecycle-runtime-2.4.0/res
-com.nativefrontend.app-material-1.1.0-9 /Users/shashankshekhar/.gradle/caches/transforms-3/4af7f0d23266db3f5bdb15fc939a61bd/transformed/material-1.1.0/res
-com.nativefrontend.app-transition-1.2.0-10 /Users/shashankshekhar/.gradle/caches/transforms-3/54c418b687e7c288a00295001ef9774c/transformed/transition-1.2.0/res
-com.nativefrontend.app-jetified-savedstate-1.1.0-11 /Users/shashankshekhar/.gradle/caches/transforms-3/85e4bbe9c5d78990c6ba607fb1c9ab7a/transformed/jetified-savedstate-1.1.0/res
-com.nativefrontend.app-jetified-viewpager2-1.0.0-12 /Users/shashankshekhar/.gradle/caches/transforms-3/8d8bf0ed3d88cfda20e86f963f79a7ca/transformed/jetified-viewpager2-1.0.0/res
-com.nativefrontend.app-jetified-core-ktx-1.5.0-13 /Users/shashankshekhar/.gradle/caches/transforms-3/8dddbd5996af305433d5aa0dc6d28601/transformed/jetified-core-ktx-1.5.0/res
+com.nativefrontend.app-jetified-core-ktx-1.6.0-9 /Users/shashankshekhar/.gradle/caches/transforms-3/3d2c4646980e639400d3d9460b902877/transformed/jetified-core-ktx-1.6.0/res
+com.nativefrontend.app-material-1.1.0-10 /Users/shashankshekhar/.gradle/caches/transforms-3/4af7f0d23266db3f5bdb15fc939a61bd/transformed/material-1.1.0/res
+com.nativefrontend.app-transition-1.2.0-11 /Users/shashankshekhar/.gradle/caches/transforms-3/54c418b687e7c288a00295001ef9774c/transformed/transition-1.2.0/res
+com.nativefrontend.app-jetified-savedstate-1.1.0-12 /Users/shashankshekhar/.gradle/caches/transforms-3/85e4bbe9c5d78990c6ba607fb1c9ab7a/transformed/jetified-savedstate-1.1.0/res
+com.nativefrontend.app-jetified-viewpager2-1.0.0-13 /Users/shashankshekhar/.gradle/caches/transforms-3/8d8bf0ed3d88cfda20e86f963f79a7ca/transformed/jetified-viewpager2-1.0.0/res
 com.nativefrontend.app-jetified-autofill-1.1.0-14 /Users/shashankshekhar/.gradle/caches/transforms-3/97aa19878e2d0d07709ad1e6d84d3065/transformed/jetified-autofill-1.1.0/res
 com.nativefrontend.app-cardview-1.0.0-15 /Users/shashankshekhar/.gradle/caches/transforms-3/b618d334ebbce8811572224b8cbc3caa/transformed/cardview-1.0.0/res
 com.nativefrontend.app-appcompat-1.4.1-16 /Users/shashankshekhar/.gradle/caches/transforms-3/be9a285d7d94d789380b4b7ef5365ae2/transformed/appcompat-1.4.1/res
@@ -30,5 +30,8 @@ com.nativefrontend.app-mergeDebugResources-28 /Users/shashankshekhar/Desktop/Ass
 com.nativefrontend.app-merged_res-29 /Users/shashankshekhar/Desktop/Assignments/Spring/cmu-17-356-final-project-s23-stylelabz/frontend/android/app/build/intermediates/merged_res/debug
 com.nativefrontend.app-debug-30 /Users/shashankshekhar/Desktop/Assignments/Spring/cmu-17-356-final-project-s23-stylelabz/frontend/android/app/src/debug/res
 com.nativefrontend.app-main-31 /Users/shashankshekhar/Desktop/Assignments/Spring/cmu-17-356-final-project-s23-stylelabz/frontend/android/app/src/main/res
-com.nativefrontend.app-packaged_res-32 /Users/shashankshekhar/Desktop/Assignments/Spring/cmu-17-356-final-project-s23-stylelabz/frontend/node_modules/react-native-safe-area-context/android/build/intermediates/packaged_res/debug
-com.nativefrontend.app-packaged_res-33 /Users/shashankshekhar/Desktop/Assignments/Spring/cmu-17-356-final-project-s23-stylelabz/frontend/node_modules/react-native-screens/android/build/intermediates/packaged_res/debug
+com.nativefrontend.app-packaged_res-32 /Users/shashankshekhar/Desktop/Assignments/Spring/cmu-17-356-final-project-s23-stylelabz/frontend/node_modules/react-native-gesture-handler/android/build/intermediates/packaged_res/debug
+com.nativefrontend.app-packaged_res-33 /Users/shashankshekhar/Desktop/Assignments/Spring/cmu-17-356-final-project-s23-stylelabz/frontend/node_modules/react-native-reanimated/android/build/intermediates/packaged_res/debug
+com.nativefrontend.app-packaged_res-34 /Users/shashankshekhar/Desktop/Assignments/Spring/cmu-17-356-final-project-s23-stylelabz/frontend/node_modules/react-native-safe-area-context/android/build/intermediates/packaged_res/debug
+com.nativefrontend.app-packaged_res-35 /Users/shashankshekhar/Desktop/Assignments/Spring/cmu-17-356-final-project-s23-stylelabz/frontend/node_modules/react-native-screens/android/build/intermediates/packaged_res/debug
+com.nativefrontend.app-packaged_res-36 /Users/shashankshekhar/Desktop/Assignments/Spring/cmu-17-356-final-project-s23-stylelabz/frontend/node_modules/react-native-view-overflow/android/build/intermediates/packaged_res/debug

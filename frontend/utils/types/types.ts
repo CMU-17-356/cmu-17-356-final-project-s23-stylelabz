@@ -9,18 +9,12 @@ export type RootStackParamList = {
   Home: undefined;
   Survey: undefined;
   UserHome: undefined;
+  Login: undefined;
+  Collection: undefined;
+  Analytics: undefined;
 };
 
-export interface Clothing {
-  type: string,
-  pattern: string,
-  sizes: [string],
-  color: string,
-  colorScheme: [string],
-  colorPalette: [string],
-  price: number,
-  link: string
-}
+
 
 
 

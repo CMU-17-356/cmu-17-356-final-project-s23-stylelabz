@@ -1,17 +1,18 @@
 import * as React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
+import { useEffect } from 'react';
 
-interface CollectionContainerProps {}
+interface CollectionProps {}
 
-const CollectionContainer = (props: CollectionContainerProps) => {
+const Collection = (props: CollectionProps) => {
   return (
     <View style={styles.container}>
-      <Text>CollectionContainer</Text>
+      <Text>Collection</Text>
     </View>
   );
 };
 
-export default CollectionContainer;
+export default Collection;
 
 const styles = StyleSheet.create({
   container: {}
