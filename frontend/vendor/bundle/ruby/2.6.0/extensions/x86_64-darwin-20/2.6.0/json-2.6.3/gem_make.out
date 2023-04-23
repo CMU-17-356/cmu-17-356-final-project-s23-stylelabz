@@ -1,0 +1,13 @@
+current directory: /Users/nathan/Desktop/17-356/cmu-17-356-final-project-s23-stylelabz/frontend/vendor/bundle/ruby/2.6.0/gems/json-2.6.3/ext/json
+/Users/nathan/.rvm/rubies/ruby-2.6.9/bin/ruby -I /Users/nathan/.rvm/rubies/ruby-2.6.9/lib/ruby/site_ruby/2.6.0 -r ./siteconf20230417-32399-ewn02y.rb extconf.rb
+creating Makefile
+
+current directory: /Users/nathan/Desktop/17-356/cmu-17-356-final-project-s23-stylelabz/frontend/vendor/bundle/ruby/2.6.0/gems/json-2.6.3/ext/json
+make "DESTDIR=" clean
+
+current directory: /Users/nathan/Desktop/17-356/cmu-17-356-final-project-s23-stylelabz/frontend/vendor/bundle/ruby/2.6.0/gems/json-2.6.3/ext/json
+make "DESTDIR="
+make: Nothing to be done for `all'.
+
+current directory: /Users/nathan/Desktop/17-356/cmu-17-356-final-project-s23-stylelabz/frontend/vendor/bundle/ruby/2.6.0/gems/json-2.6.3/ext/json
+make "DESTDIR=" install
