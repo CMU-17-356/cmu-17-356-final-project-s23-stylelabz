@@ -15,7 +15,7 @@ export interface Survey {
 export const SurveySchema = new Schema<Survey>({
     questions: [{
         id: { type: Number, required: true },
-        category: { type: String, enum: ['style', 'color_family', 'price'] },
+        category: { type: String, enum: ['style', 'color_family', 'price', 'pattern'] },
         text: { type: String, required: true }
     }]
 });

@@ -6,6 +6,7 @@ interface SurveyResponseInterface {
     userId: Schema.Types.ObjectId,
     surveyId: Schema.Types.ObjectId,
     response: [{
+        question_id: Schema.Types.ObjectId,
         answer?: string,
         answerMaxValue?: number,
         answerMinValue?: number
