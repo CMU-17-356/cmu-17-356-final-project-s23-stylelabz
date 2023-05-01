@@ -4,9 +4,9 @@ import mongoose from 'mongoose';
 // 1. Create an interface representing a document in MongoDB.
 interface UserPreferenceInterface {
     userId: Schema.Types.ObjectId,
-    highestClothingScore: string,
-    highestPatternScore: string,
-    PastelScore:  string,
+    //highestClothingScore: string,
+    //highestPatternScore: string,
+    pastelScore:  string,
     activewearScore: number,
     blazersScore: number,
     coatsScore: number,
@@ -44,9 +44,9 @@ interface UserPreferenceInterface {
 // 2. Create a Schema corresponding to the document interface.
 const UserPreferenceSchema = new Schema<UserPreferenceInterface>({
     userId: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
-    highestClothingScore: String,
-    highestPatternScore: String,
-    PastelScore:  String,
+    //highestClothingScore: String,
+    //highestPatternScore: String,
+    pastelScore:  String,
     activewearScore: {type:Number, default:0},
     blazersScore: {type:Number, default:0},
     coatsScore: {type:Number, default:0},

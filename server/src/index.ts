@@ -5,6 +5,7 @@ import collectionRouter from './controllers/collection.conotroller';
 import userRouter from './controllers/user.controller';
 import surveyRouter from './controllers/survey.controller';
 import surveyResponseRouter from './controllers/surveyResponse.controller';
+import userPreference from './controllers/userPreference.controller';
 
 const app: Express = express();
 
@@ -26,6 +27,8 @@ app.get('/', (req, res) => {
 
 app.use('/clothing', clothingRouter);
 app.use('/collection', collectionRouter);
+app.use('/userPreference', userPreference);
 app.use('/user', userRouter);
 app.use('/survey', surveyRouter);
-app.use('/SurveyResponse', surveyResponseRouter)
+app.use('/SurveyResponse', surveyResponseRouter);
+

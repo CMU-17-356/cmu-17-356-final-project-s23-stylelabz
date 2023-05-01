@@ -45,4 +45,18 @@ router.get('/:user_id', async (req, res) => {
     // disconnet_db();
 });
 
+//Get all users
+router.get('/', async (req, res) => {
+    connect_db();
+    try {
+        const data = await UserModel.find();
+        res.json(data);
+    } catch (error) {
+        if (error instanceof Error) {
+            res.status(400).json({ message: error.message });
+        }
+    }
+    // disconnet_db();
+});
+
 export default router;
