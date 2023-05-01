@@ -19,6 +19,12 @@ const HomeScreen = (props: Props) => {
                 type="primary"
                 text="Get Started"
             />
+            <Text style={styles.description}>Already have?</Text>
+            <ButtonComponent
+                onPressed={() => navigation.navigate('Login')}
+                type="primary"
+                text="Login"
+            />
         </View>
     );
 };

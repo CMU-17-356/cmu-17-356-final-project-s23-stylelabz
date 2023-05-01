@@ -9,7 +9,12 @@ export type RootStackParamList = {
   Home: undefined;
   Survey: undefined;
   UserHome: undefined;
+  Login: undefined;
+  Collection: undefined;
+  Analytics: undefined;
 };
+
+
 
 
 

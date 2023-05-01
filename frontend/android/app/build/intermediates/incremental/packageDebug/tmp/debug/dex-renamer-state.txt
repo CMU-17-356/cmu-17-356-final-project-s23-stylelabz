@@ -1,19 +1,19 @@
-#Wed Apr 19 15:43:02 EDT 2023
-path.4=7/classes.dex
-path.3=14/classes.dex
-path.2=0/classes.dex
-path.1=0/classes.dex
-path.5=classes2.dex
+#Mon May 01 16:34:59 EDT 2023
+base.0=/Users/shashankshekhar/Desktop/Assignments/Spring/cmu-17-356-final-project-s23-stylelabz/frontend/android/app/build/intermediates/dex/debug/mergeExtDexDebug/classes.dex
+base.1=/Users/shashankshekhar/Desktop/Assignments/Spring/cmu-17-356-final-project-s23-stylelabz/frontend/android/app/build/intermediates/dex/debug/mergeLibDexDebug/0/classes.dex
+base.2=/Users/shashankshekhar/Desktop/Assignments/Spring/cmu-17-356-final-project-s23-stylelabz/frontend/android/app/build/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex
+base.3=/Users/shashankshekhar/Desktop/Assignments/Spring/cmu-17-356-final-project-s23-stylelabz/frontend/android/app/build/intermediates/dex/debug/mergeProjectDexDebug/14/classes.dex
+base.4=/Users/shashankshekhar/Desktop/Assignments/Spring/cmu-17-356-final-project-s23-stylelabz/frontend/android/app/build/intermediates/dex/debug/mergeProjectDexDebug/7/classes.dex
+base.5=/Users/shashankshekhar/Desktop/Assignments/Spring/cmu-17-356-final-project-s23-stylelabz/frontend/android/app/build/intermediates/dex/debug/mergeExtDexDebug/classes2.dex
 path.0=classes.dex
-base.4=C\:\\Users\\User\\17356\\cmu-17-356-final-project-s23-stylelabz\\frontend\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\7\\classes.dex
-base.3=C\:\\Users\\User\\17356\\cmu-17-356-final-project-s23-stylelabz\\frontend\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\14\\classes.dex
-base.2=C\:\\Users\\User\\17356\\cmu-17-356-final-project-s23-stylelabz\\frontend\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
-base.1=C\:\\Users\\User\\17356\\cmu-17-356-final-project-s23-stylelabz\\frontend\\android\\app\\build\\intermediates\\dex\\debug\\mergeLibDexDebug\\0\\classes.dex
-base.0=C\:\\Users\\User\\17356\\cmu-17-356-final-project-s23-stylelabz\\frontend\\android\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
-renamed.3=classes4.dex
-renamed.2=classes3.dex
-renamed.1=classes2.dex
+path.1=0/classes.dex
+path.2=0/classes.dex
+path.3=14/classes.dex
+path.4=7/classes.dex
+path.5=classes2.dex
 renamed.0=classes.dex
-renamed.5=classes6.dex
+renamed.1=classes2.dex
+renamed.2=classes3.dex
+renamed.3=classes4.dex
 renamed.4=classes5.dex
-base.5=C\:\\Users\\User\\17356\\cmu-17-356-final-project-s23-stylelabz\\frontend\\android\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
+renamed.5=classes6.dex

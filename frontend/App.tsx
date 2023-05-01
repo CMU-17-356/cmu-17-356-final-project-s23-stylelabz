@@ -17,8 +17,13 @@ import Registration from './Container/Registration';
 import {RootStackParamList} from './utils/types/types';
 import SurveyScreen from './Container/Survey';
 import UserHome from './Container/UserHome';
+import Login from './Container/Login'
+import Collection from './Container/Collection';
+import Analytics from './Container/Analytics';
+
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
+
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -29,17 +34,22 @@ function App(): JSX.Element {
 
   return (
     <NavigationContainer>
-      <RootStack.Navigator>
-        <RootStack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{title: 'Welcome'}}
-        />
-        <RootStack.Screen name="Registration" component={Registration} />
-        <RootStack.Screen name="Survey" component={SurveyScreen} />
-        <RootStack.Screen name="UserHome" component={UserHome} />
-      </RootStack.Navigator>
-    </NavigationContainer>
+          <RootStack.Navigator>
+            <RootStack.Screen
+              name="Home"
+              component={HomeScreen}
+              options={{title: 'Welcome'}}
+            />
+            <RootStack.Screen name="Registration" component={Registration} />
+            <RootStack.Screen name="Survey" component={SurveyScreen} />
+            <RootStack.Screen name="Login" component={Login} />
+            <RootStack.Screen name="Collection" component={Collection} />
+            <RootStack.Screen name="Analytics" component={Analytics} />
+            <RootStack.Screen name="UserHome" component={UserHome} options={{headerShown: false}}/>
+            
+          </RootStack.Navigator>
+        </NavigationContainer>
+        
   );
 }
 

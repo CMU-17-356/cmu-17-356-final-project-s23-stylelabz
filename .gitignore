@@ -1,4 +1,10 @@
 .DS_Store
+
+frontend/node_modules
+frontend/ios
+frontend/android
+frontend/vendor
+
 server/node_modules
 .expo/
 dist/

@@ -82,57 +82,50 @@ function SurveyScreen(props: Props) {
         <Text>Tell us a little bit more about yourself</Text>
         <View>
           <Text>What clothing styles do you like (select all that apply)?</Text>
-          <FlatList
-            data={clothingStyles}
-            renderItem={({item, index}) => (
-              <View style={styles.answer}>
-                <CheckBox
-                  style={styles.checkboxWrapper}
-                  value={clothingStylesState[index]}
-                  onChange={() => {
-                    handleChangeClothingStyles(index);
-                  }}
-                />
-                <Text>{item}</Text>
-              </View>
-            )}
-          />
+          {clothingStyles.map((item, index) => {
+            return <View style={styles.answer} key={index}>
+            <CheckBox
+              style={styles.checkboxWrapper}
+              value={clothingStylesState[index]}
+              onChange={() => {
+                handleChangeClothingStyles(index);
+              }}
+            />
+            <Text>{item}</Text>
+          </View>
+          })}
+
           <Text>
             What patterns do you like your clothing to have (select all that
             apply)?
           </Text>
-          <FlatList
-            data={patterns}
-            renderItem={({item, index}) => (
-              <View style={styles.answer}>
-                <CheckBox
-                  style={styles.checkboxWrapper}
-                  value={patternsState[index]}
-                  onChange={() => {
-                    handlePatterns(index);
-                  }}
-                />
-                <Text>{item}</Text>
-              </View>
-            )}
-          />
+          {patterns.map((item, index) => {
+            return <View style={styles.answer} key={index}>
+            <CheckBox
+              style={styles.checkboxWrapper}
+              value={patternsState[index]}
+              onChange={() => {
+                handlePatterns(index);
+              }}
+            />
+            <Text>{item}</Text>
+          </View>
+          })}
+        
 
           <Text>What are your favorite colors?</Text>
-          <FlatList
-            data={colors}
-            renderItem={({item, index}) => (
-              <View style={styles.answer}>
-                <CheckBox
-                  style={styles.checkboxWrapper}
-                  value={colorsState[index]}
-                  onChange={() => {
-                    handleColors(index);
-                  }}
-                />
-                <Text>{item}</Text>
-              </View>
-            )}
-          />
+          {colors.map((item, index) => {
+            return <View style={styles.answer} key={index}>
+            <CheckBox
+              style={styles.checkboxWrapper}
+              value={colorsState[index]}
+              onChange={() => {
+                handleColors(index);
+              }}
+            />
+            <Text>{item}</Text>
+          </View>
+          })}
 
           <Text>What is your preferred price range?</Text>
           <Slider
