@@ -1,31 +1,42 @@
-import express, { Express } from 'express';
+import express, { Express, Request, Response } from 'express';
 import cors from 'cors';
-import clothingRouter from './controllers/clothing.controller';
-import collectionRouter from './controllers/collection.conotroller';
-import userRouter from './controllers/user.controller';
-import surveyRouter from './controllers/survey.controller';
-import surveyResponseRouter from './controllers/surveyResponse.controller';
+import mongoose from "mongoose";
+import * as dotenv from 'dotenv';
+
+import routes from './routes';
+
+dotenv.config();
 
 const app: Express = express();
 
 app.use(express.json());
 app.use(cors());
 
-const PORT = 8080;
-const HOST = '0.0.0.0';
-app.listen(PORT, HOST, () => console.log("Server started at", HOST,PORT));
+const PORT = ((process.env.PORT as unknown) as number) || 8080;
+const HOST = process.env.HOST || '0.0.0.0';
 
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
-app.get('/', (req, res) => {
-    res.send('Hello StyleLabz!');
-});
+const MONGODB_CONNECTION = process.env.MONGODB_CONNECTION;
 
-app.use('/clothing', clothingRouter);
-app.use('/collection', collectionRouter);
-app.use('/user', userRouter);
-app.use('/survey', surveyRouter);
-app.use('/SurveyResponse', surveyResponseRouter)
+
+if (MONGODB_CONNECTION) {
+  mongoose
+    .connect(`${MONGODB_CONNECTION}`)
+    .then(() => {
+      const app: Express = express();
+
+      app.use('/', routes);
+
+      app.use((req: Request, res: Response, next) => {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        next();
+      });
+
+      app.listen(PORT, HOST, () => {
+        console.log(`⚡️[server]: Server is running at http://${HOST}:${PORT}`);
+      });
+    })
+} else {
+  console.log("Server connection to MongoDB failed - Missing connection string");
+}
+

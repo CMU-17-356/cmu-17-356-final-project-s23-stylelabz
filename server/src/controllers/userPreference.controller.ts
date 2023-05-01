@@ -1,6 +1,5 @@
 import express from 'express';
 import { UserPreferenceModel } from '../models/userPreference.model';
-import { connect_db, disconnet_db } from '../database/connection';
 import {Schema} from "mongoose";
 
 const router = express.Router();
@@ -10,7 +9,6 @@ const router = express.Router();
  **************************** */
 // Create New Preference
 router.post('/', async (req, res) => {
-    connect_db();
     const data = new UserPreferenceModel({
         userId: req.body.userId,
         highestClothingScore: req.body.highestClothingScore,
@@ -56,13 +54,11 @@ router.post('/', async (req, res) => {
             res.status(400).json({ message: error.message });
         }
     }
-    // disconnet_db();
 });
 
 
 // Increase preference score
 router.put('/:user_id', async (req, res) => {
-    connect_db();
     try {
         const data = await UserPreferenceModel.findOne({ _id: req.params.user_id });
         if (req.body.PastelScore && data != null){
@@ -85,7 +81,6 @@ router.put('/:user_id', async (req, res) => {
             res.status(400).json({ message: error.message });
         }
     }
-    // disconnet_db();
 });
 
 /*

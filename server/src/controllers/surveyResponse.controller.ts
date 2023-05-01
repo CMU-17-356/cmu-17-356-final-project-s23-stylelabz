@@ -1,6 +1,5 @@
 import express from 'express';
 import { SurveyResponseModel } from '../models/surveyResponse.model';
-import { connect_db, disconnet_db } from '../database/connection';
 import {Schema} from "mongoose";
 
 const router = express.Router();
@@ -10,7 +9,6 @@ const router = express.Router();
  **************************** */
 // Create user's response
 router.post('/', async (req, res) => {
-    connect_db();
     const data = new SurveyResponseModel({
         userId: req.body.userId,
         surveyId: req.body.surveyId,
@@ -25,13 +23,11 @@ router.post('/', async (req, res) => {
             res.status(400).json({ message: error.message });
         }
     }
-    // disconnet_db();
 });
 
 
 // Get user response
 router.get('/:user_id', async (req, res) => {
-    connect_db();
     const userId = req.params.user_id;
     try {
         const data = await SurveyResponseModel.find({ userId: userId });
@@ -41,7 +37,6 @@ router.get('/:user_id', async (req, res) => {
             res.status(400).json({ message: error.message });
         }
     }
-    // disconnet_db();
 });
 
 export default router;
