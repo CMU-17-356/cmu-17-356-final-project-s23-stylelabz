@@ -4,8 +4,11 @@ frontend/node_modules
 frontend/ios
 frontend/android
 frontend/vendor
+frontend/android
+frontend/ios
 
 server/node_modules
 .expo/
 dist/
 .idea
+.env
