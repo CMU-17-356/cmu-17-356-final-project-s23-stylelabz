@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import { SurveyModel } from '../models/survey.model';
 
 const router = express.Router();
@@ -6,14 +6,20 @@ const router = express.Router();
 /******************************
  * Survey APIs
  **************************** */
-// Create new survey questions
-router.post('/', async (req, res) => {
-    const data = new SurveyModel({
-        questions: req.body.questions
-    });
+// Create user's response
+router.post('/', async (req: Request, res: Response) => {
     try {
-        const dataToSave = await data.save();
-        res.status(200).json(dataToSave);
+        if (req.body.userId && req.body.response) {
+            const data = new SurveyModel({
+                userId: req.body.userId,
+                response: { ...req.body.response }
+            });
+            const dataToSave = await data.save();
+            res.status(200).json(dataToSave);
+        } else {
+            res.status(400).json({ message: "Bad Request"});
+        }
+        
     } catch (error) {
         if (error instanceof Error) {
             res.status(400).json({ message: error.message });
@@ -22,32 +28,19 @@ router.post('/', async (req, res) => {
 });
 
 
-// Get survey questions
-router.get('/', async (req, res) => {
+// Get user response
+router.get('/:user_id', async (req: Request, res: Response) => {
+    const userId = req.params.user_id;
     try {
-        const data = await SurveyModel.find();
-        res.json(data);
+        SurveyModel
+            .findOne({ userId: userId })
+            .exec()
+            .then((data) => res.json(data));
     } catch (error) {
         if (error instanceof Error) {
             res.status(400).json({ message: error.message });
         }
     }
-});
-
-// get list of clothing styles
-router.get('/styles', async (req, res) => {
-        const data = { "styles":
-                ["Parisian", "Athleisure", "Classic", "Streetwear", "Business Casual",
-                    "Retro", "Mnimialist", "Vintage", "Grunge", "Chic", "Boho", "Preppy",
-                    "Punk", "Gothic", "Ethnic", "Kawaii"]};
-        res.json(data);
-});
-
-// get list of clothing patterns
-router.get('/patterns', async (req, res) => {
-    const data = { "patterns":
-            ['solid', 'floral', 'spotted', 'plaid', 'striped', 'graphics']};
-    res.json(data);
 });
 
 export default router;

@@ -8,7 +8,6 @@ interface UserInterface {
     first_name: string,
     last_name: string,
     gender: string,
-    DOB: Date,
     email: string,
 }
 
@@ -18,7 +17,6 @@ const UserSchema = new Schema<UserInterface>({
     first_name: { type: String, required: true },
     last_name: { type: String, required: true },
     gender: { type: String, enum: ['M', 'F'] },
-    DOB: { type: Date, required: true },
     email: { type: String, required: false },
 });
 

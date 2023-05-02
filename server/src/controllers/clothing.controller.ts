@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import { ClothingModel} from '../models/clothing.model';
-import { SurveyResponseModel } from '../models/surveyResponse.model';
+import { SurveyModel } from '../models/survey.model';
 
 const router = express.Router();
 
@@ -8,9 +8,9 @@ const router = express.Router();
  * Clothing APIs
  **************************** */
 // Get clothing by ID
-router.get('/:clothing_id', async (req, res) => {
+router.get('/:clothing_id', async (req: Request, res: Response) => {
     try {
-        const data = await ClothingModel.findOne({ id: req.params.clothing_id });
+        const data = await ClothingModel.findOne({ id: req.params.clothing_id }).exec();
         res.json(data);
     } catch (error) {
         if (error instanceof Error) {
@@ -29,7 +29,7 @@ router.get('/', async (req: Request, res: Response) => {
         if (req.query.userId) { userId = req.query.userId }
         if (req.query.boundaryId) { boundaryId = req.query.boundaryId } 
         if (userId) {
-            const sr = await SurveyResponseModel.findOne({ userId: userId }).exec();
+            const sr = await SurveyModel.findOne({ userId: userId }).exec();
             data = await ClothingModel.find().limit(10);
         } else {
             if (boundaryId) {
