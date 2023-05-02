@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import clothingRouter from './controllers/clothing.controller'
-import collectionRouter from './controllers/collection.conotroller';
+import collectionRouter from './controllers/collection.controller';
 import userRouter from './controllers/user.controller';
 import surveyRouter from './controllers/survey.controller';
 import surveyResponseRouter from './controllers/surveyResponse.controller';
