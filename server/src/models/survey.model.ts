@@ -24,4 +24,4 @@ const SurveySchema = new Schema<SurveyInterface>({
 });
 
 // 3. Create a Model.
-export const SurveyModel = mongoose.model('survey', SurveySchema);
+export const SurveyModel = mongoose.model('Survey', SurveySchema);
