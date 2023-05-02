@@ -40,4 +40,16 @@ router.get('/:user_id', async (req, res) => {
     }
 });
 
+//Get all users
+router.get('/', async (req, res) => {
+    try {
+        const data = await UserModel.find();
+        res.json(data);
+    } catch (error) {
+        if (error instanceof Error) {
+            res.status(400).json({ message: error.message });
+        }
+    }
+});
+
 export default router;

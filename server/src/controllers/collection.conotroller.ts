@@ -40,8 +40,9 @@ router.get('/:collection_id', async (req, res) => {
 router.get('/:user_id', async (req, res) => {
     const userId = req.params.user_id;
     try {
-        const data = await CollectionModel.find({ userId: userId }).where('response')
-            .all(['liked', 'superliked']);
+        const data = await CollectionModel.find({ userId: userId })
+            .where('response')
+            .in([ 'liked','superliked']);
         res.json(data);
     } catch (error) {
         if (error instanceof Error) {
