@@ -27,14 +27,13 @@ router.post('/', async (req, res) => {
             res.status(400).json({ message: error.message });
         }
     }
-    // disconnet_db();
 });
 
 
 // Get clothing by ID
 router.get('/:clothing_id', async (req, res) => {
     try {
-        const data = await ClothingModel.findOne({ _id: req.params.clothing_id });
+        const data = await ClothingModel.findOne({ id: req.params.clothing_id });
         res.json(data);
     } catch (error) {
         if (error instanceof Error) {
@@ -47,7 +46,7 @@ router.get('/:clothing_id', async (req, res) => {
 // TODO: ADD PAGINATION
 router.get('/', async (req, res) => {
     try {
-        const data = await ClothingModel.find();
+        const data = await ClothingModel.find().limit(10);
         res.json(data);
     } catch (error) {
         if (error instanceof Error) {
@@ -59,7 +58,7 @@ router.get('/', async (req, res) => {
 // Delete clothing by ID
 router.delete('/:clothing_id', async (req, res) => {
     try {
-        const data = await ClothingModel.findOneAndDelete({ _id: req.params.clothing_id });
+        const data = await ClothingModel.findOneAndDelete({ id: req.params.clothing_id });
         res.json(data);
     } catch (error) {
         if (error instanceof Error) {
