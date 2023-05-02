@@ -4,7 +4,6 @@ import mongoose from 'mongoose';
 // 1. Create an interface representing a document in MongoDB.
 interface UserInterface {
     username: string,
-    password: string,
     first_name: string,
     last_name: string,
     gender: string,

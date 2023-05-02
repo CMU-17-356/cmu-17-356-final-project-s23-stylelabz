@@ -23,9 +23,10 @@ router.post('/', async (req, res) => {
 
 
 // Get survey questions
-router.get('/', async (req, res) => {
+// servey id: 64516fbaa4b80a9c515b2169
+router.get('/:servey_id', async (req, res) => {
     try {
-        const data = await SurveyModel.find();
+        const data = await SurveyModel.find({ _id: req.params.servey_id});
         res.json(data);
     } catch (error) {
         if (error instanceof Error) {
@@ -33,6 +34,7 @@ router.get('/', async (req, res) => {
         }
     }
 });
+
 
 // get list of clothing styles
 router.get('/styles', async (req, res) => {
