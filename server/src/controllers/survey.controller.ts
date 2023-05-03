@@ -17,9 +17,9 @@ router.post('/', async (req: Request, res: Response) => {
             const dataToSave = await data.save();
             res.status(200).json(dataToSave);
         } else {
-            res.status(400).json({ message: "Bad Request"});
+            res.status(400).json({ message: "Bad Request" });
         }
-        
+
     } catch (error) {
         if (error instanceof Error) {
             res.status(400).json({ message: error.message });

@@ -12,7 +12,7 @@ router.post('/', async (req, res) => {
         if (req.body.userId && req.body.clothingId && req.body.swipe) {
             const userId = req.body.userId;
             const clothingId = req.body.clothingId;
-            const swipe = req.body.swipe; 
+            const swipe = req.body.swipe;
 
             let update;
 
@@ -30,7 +30,7 @@ router.post('/', async (req, res) => {
                 .catch(() => res.sendStatus(500));
 
         } else {
-            res.status(400).json({ message: 'Bad Request'});
+            res.status(400).json({ message: 'Bad Request' });
         }
     } catch (error) {
         if (error instanceof Error) {

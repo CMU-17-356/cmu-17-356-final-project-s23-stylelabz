@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { ClothingModel} from '../models/clothing.model';
+import { ClothingModel } from '../models/clothing.model';
 import { SurveyModel } from '../models/survey.model';
 
 const router = express.Router();
@@ -27,15 +27,15 @@ router.get('/', async (req: Request, res: Response) => {
         let userId;
         let boundaryId;
         if (req.query.userId) { userId = req.query.userId }
-        if (req.query.boundaryId) { boundaryId = req.query.boundaryId } 
+        if (req.query.boundaryId) { boundaryId = req.query.boundaryId }
         if (userId) {
             const sr = await SurveyModel.findOne({ userId: userId }).exec();
             data = await ClothingModel.find().limit(10);
         } else {
             if (boundaryId) {
-                data = await ClothingModel.find({ _id: { $lt: boundaryId } }).sort( { _id: -1 } ).limit(10);
+                data = await ClothingModel.find({ _id: { $lt: boundaryId } }).sort({ _id: -1 }).limit(10);
             } else {
-                data = await ClothingModel.find().sort( { _id: -1 } ).limit(10);
+                data = await ClothingModel.find().sort({ _id: -1 }).limit(10);
             }
         }
         res.json(data);

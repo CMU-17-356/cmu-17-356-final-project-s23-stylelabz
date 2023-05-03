@@ -41,7 +41,7 @@ router.get('/:user_id', async (req, res) => {
     try {
         const data = await CollectionModel.find({ userId: userId })
             .where('response')
-            .in(['liked','superliked']);
+            .in(['liked', 'superliked']);
         res.json(data);
     } catch (error) {
         if (error instanceof Error) {

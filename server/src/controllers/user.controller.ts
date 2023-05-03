@@ -1,5 +1,5 @@
 import express from 'express';
-import { UserModel} from '../models/user.model';
+import { UserModel } from '../models/user.model';
 
 const router = express.Router();
 
@@ -9,7 +9,7 @@ const router = express.Router();
 // Login
 router.post('/login', async (req, res) => {
     try {
-        const data = await UserModel.findOne({ username: req.body.username});
+        const data = await UserModel.findOne({ username: req.body.username });
         res.json(data);
     } catch (error) {
         if (error instanceof Error) {
@@ -21,20 +21,20 @@ router.post('/login', async (req, res) => {
 // Create New User
 router.post('/register', async (req, res) => {
 
-    let registeredUser= true;
+    let registeredUser = true;
 
     // check if the username exists:
     // email
-    const isEmailRegistered= await UserModel.findOne({email: req.body.email});
+    const isEmailRegistered = await UserModel.findOne({ email: req.body.email });
 
-    if (isEmailRegistered == null){
-         registeredUser= false;
+    if (isEmailRegistered == null) {
+        registeredUser = false;
     }
 
     // username
-    const isUsernameRegistered= await UserModel.findOne({ username: req.body.username});
-    if (isUsernameRegistered == null){
-       registeredUser=false;
+    const isUsernameRegistered = await UserModel.findOne({ username: req.body.username });
+    if (isUsernameRegistered == null) {
+        registeredUser = false;
     }
 
     if (!registeredUser) {
@@ -51,11 +51,11 @@ router.post('/register', async (req, res) => {
             res.status(200).json(dataToSave);
         } catch (error) {
             if (error instanceof Error) {
-                res.status(400).json({message: error.message});
+                res.status(400).json({ message: error.message });
             }
         }
-    }else{
-        res.status(400).send({ message: 'Failed! Username or Email is already in use!'});
+    } else {
+        res.status(400).send({ message: 'Failed! Username or Email is already in use!' });
     }
 });
 
