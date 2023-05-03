@@ -7,6 +7,8 @@ import {RootStackParamList} from '../utils/types/types';
 import {useState} from 'react';
 import {Dropdown} from 'react-native-element-dropdown';
 import DatePicker from 'react-native-date-picker';
+import { loginUser, signupUser } from '../api/login';
+import { UserContext } from '../utils/context';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Registration'>;
 
@@ -20,10 +22,33 @@ const genders = [
 const Registration = (props: Props) => {
   const {navigation} = props;
   const [userName, setuserName] = useState('');
-  const [name, setName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [gender, setGender] = useState('');
-  const [age, setAge] = useState('');
   const [email, setEmail] = useState('');
+  const [errors, seterrors] = useState('');
+  const context = React.useContext(UserContext);
+  const signupHandler = async () => {
+    if (userName.length > 1){
+      const response = await signupUser({
+        username: userName,
+        first_name: firstName,
+        last_name: lastName,
+        email: email,
+        gender: gender
+      });
+        if(response) {
+            context.setUserId(response as string)
+            navigation.reset({
+              index: 0,
+              routes: [{name: 'Survey'}],
+            });
+        }
+    }
+    else{
+        seterrors("your username needs to exist")
+    }
+  }
   return (
     <View style={styles.container}>
       <Text style={styles.registrationText}>Select a fancy username</Text>
@@ -32,24 +57,20 @@ const Registration = (props: Props) => {
         value={userName}
         placeHolder="JazzItUp@StyleLabz"
       />
-      <Text style={styles.registrationText}>Name</Text>
-      <InputBox onChanged={setName} value={name} />
+      <Text style={styles.ErrorText}>{errors}</Text>
+      <Text style={styles.registrationText}>First Name</Text>
+      <InputBox onChanged={setFirstName} value={firstName} placeHolder={''} />
+      <Text style={styles.registrationText}>Last Name</Text>
+      <InputBox onChanged={setLastName} value={lastName} placeHolder={''} />
       <Text style={styles.registrationText}>Email</Text>
-      <InputBox onChanged={setEmail} value={email} />
+      <InputBox onChanged={setEmail} value={email} placeHolder={''} />
       <Text style={styles.registrationText}>Gender</Text>
-      <InputBox onChanged={setGender} value={gender} />
-      <Text style={styles.registrationText}>Age</Text>
-      <InputBox onChanged={setAge} value={age} />
+      <InputBox onChanged={setGender} value={gender} placeHolder={''} />
 
       {/* <Text style={styles.registrationText}>Date of Birth</Text>
       <DatePicker date={dob} onDateChange={setDob} /> */}
       <ButtonComponent
-        onPressed={() => {
-          navigation.reset({
-            index: 0,
-            routes: [{name: 'Survey'}],
-          });
-        }}
+        onPressed={signupHandler}
         type="primary"
         text="Submit"
       />
@@ -71,4 +92,10 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     fontSize: 20,
   },
+  ErrorText: {
+    fontFamily: 'Cochin',
+    fontWeight: "400",
+    fontSize: 20,
+    color: "red"
+}
 });

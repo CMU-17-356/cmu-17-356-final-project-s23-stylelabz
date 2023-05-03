@@ -13,7 +13,18 @@ interface SwipeContainerProps { }
 const { height } = Dimensions.get('window')
 const demoContent = clothingData
 const SwipeContainer = (props: SwipeContainerProps) => {
-  const useSwiper = useRef(null).current
+  const useSwiper = useRef(null).current;
+
+  const swipeLeft = () => {
+
+  }
+
+  const swipeRight = () => {
+
+  }
+  const fetchMoreCards = () => {
+
+  }
   return (
     <View style={styles.container}>
       <Swiper
@@ -24,8 +35,10 @@ const SwipeContainer = (props: SwipeContainerProps) => {
             <OutfitCard style={styles.card} data={card}/>
           )
         }}
-        onSwiped={(cardIndex) => { console.log(cardIndex) }}
-        onSwipedAll={() => { console.log('onSwipedAll') }}
+        onSwipedLeft={swipeLeft}
+        onSwipedRight={swipeRight}
+        // onSwiped={(cardIndex) => { console.log(cardIndex) }}
+        onSwipedAll={fetchMoreCards}
         verticalSwipe={false}
         cardIndex={0}
         backgroundColor={'#fff'}

@@ -1,0 +1,1 @@
+export const serverUrl = 'https://stylelabz-server.fly.dev/'

@@ -6,6 +6,8 @@ import ButtonComponent from '../components/Button';
 import CheckBox from '@react-native-community/checkbox';
 import {FlatList} from 'react-native-gesture-handler';
 import {Slider} from '@miblanchard/react-native-slider';
+import { saveSurvey } from '../api/survey';
+import { UserContext } from '../utils/context';
 //import InputBox from '../components/Input';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Survey'>;
@@ -53,12 +55,15 @@ function SurveyScreen(props: Props) {
     new Array(colors.length).fill(false),
   );
   const [price, setPrice] = React.useState([0, 1000]);
-
+  const [isValidForm, setIsValidForm] = React.useState(false);
+  const context = React.useContext(UserContext);
   const handleChangeClothingStyles = (position: number) => {
     const updatedState = clothingStylesState.map((item, index) =>
       index === position ? !item : item,
     );
     setClothingStylesState(updatedState);
+    const validForm = isValid();
+    setIsValidForm(validForm);
   };
 
   const handlePatterns = (position: number) => {
@@ -66,6 +71,9 @@ function SurveyScreen(props: Props) {
       index === position ? !item : item,
     );
     setPatternsState(updatedState);
+    setClothingStylesState(updatedState);
+    const validForm = isValid();
+    setIsValidForm(validForm);
   };
 
   const handleColors = (position: number) => {
@@ -73,7 +81,69 @@ function SurveyScreen(props: Props) {
       index === position ? !item : item,
     );
     setColorsState(updatedState);
+    setClothingStylesState(updatedState);
+    const validForm = isValid();
+    setIsValidForm(validForm);
   };
+
+  const handleSurveySubmission = async () => {
+    let clothingStylesSelected: string[] = [];
+    clothingStylesState.forEach((item, index) => {
+      if(item) {
+        clothingStylesSelected.push(clothingStyles[index])
+      }
+    })
+    let patternsSelected: string[] = [];
+    patternsState.forEach((item, index) => {
+      if(item) {
+        patternsSelected.push(patterns[index])
+      }
+    })
+    let colorSelected: string[] = [];
+    colorsState.forEach((item, index) => {
+      if(item) {
+        colorSelected.push(colors[index])
+      }
+    })
+    const response: any = await saveSurvey({
+      user_id: context.user_id,
+      response: {
+        color: colorSelected,
+        pattern: patternsSelected,
+        style: clothingStylesSelected,
+        price: price
+      }
+    })
+    if(response.status ==200) {
+      navigation.reset({
+        index: 0,
+        routes: [{name: 'UserHome'}],
+      });
+    }
+  }
+
+  const isValid = () => {
+    let isClothingStyle = false;
+    clothingStylesState.forEach((item) => {
+      console.log(item)
+      if(item) {
+        isClothingStyle = true;
+      }
+    });
+    let isPattern = false;
+    patternsState.forEach((item) => {
+      if(item) {
+        isPattern = true;
+      }
+    })
+    let isColor = false;
+    colorsState.forEach((item) => {
+      if(item) {
+        isColor = true;
+      }
+    })
+    return isClothingStyle && isPattern && isColor;
+  }
 
   return (
     <View style={styles.container}>
@@ -147,6 +217,7 @@ function SurveyScreen(props: Props) {
               routes: [{name: 'UserHome'}],
             });
           }}
+          disable={!isValidForm}
         />
       </ScrollView>
     </View>
