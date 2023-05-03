@@ -42,9 +42,15 @@ router.get('/', async (req: Request, res: Response) => {
                 if (preferredColors) { query.color = { $in: preferredColors } }
                 if (preferredPriceRange) { query.price = { $gte: preferredPriceRange[0], $lte: preferredPriceRange[1] } }
 
+                if (boundaryId) { query._id = { $lt: boundaryId } }
+
                 data = await ClothingModel.find(query).limit(10);
             } else {
-                data = await ClothingModel.find().limit(10);
+                if (boundaryId) {
+                    data = await ClothingModel.find({ _id: { $lt: boundaryId } }).sort({ _id: -1 }).limit(10);
+                } else {
+                    data = await ClothingModel.find().limit(10);
+                }
             }
         } else {
             if (boundaryId) {
