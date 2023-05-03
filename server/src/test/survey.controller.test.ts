@@ -27,10 +27,10 @@ describe('Survey Controller', () => {
         });
     });
 
-    describe('Route GET /survey', () => {
-        it('Should GET to /survey', async () => {
+    describe('Route GET /survey/:servey_id', () => {
+        it('Should GET to /survey/:servey_id', async () => {
             const res: Response = await request('http://0.0.0.0:8080')
-                .get('/survey');
+                .get('/survey/'+"644c7ce3141939d5a76234d2");
             expect(res).to.have.status(200);
             console.log(res.body);
             expect(res.body).to.be.a('array');
