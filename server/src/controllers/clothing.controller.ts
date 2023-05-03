@@ -20,7 +20,6 @@ router.get('/:clothing_id', async (req: Request, res: Response) => {
 });
 
 // Get all clothing
-// TODO: ADD PAGINATION
 router.get('/', async (req: Request, res: Response) => {
     try {
         let data;
@@ -31,8 +30,23 @@ router.get('/', async (req: Request, res: Response) => {
         if (userId) {
             const sr = await SurveyModel.findOne({ userId: userId }).exec();
             if (sr) {
+                console.log('Survey found', sr);
                 // TODO
-                data = await ClothingModel.find().limit(10);
+                const query: {[k: string]: any} = {};
+
+                const preferredStyles = sr.response.style;
+                const preferredPatterns = sr.response.pattern;
+                const preferredColors = sr.response.color;
+                const preferredPriceRange = sr.response.price;
+
+                if (preferredStyles) { query.usage = { $in: preferredStyles } }
+                if (preferredPatterns) { query.pattern = { $in: preferredPatterns } }
+                if (preferredColors) { query.color = { $in: preferredColors } }
+                if (preferredPriceRange) { query.price = { $gte: preferredPriceRange[0], $lte: preferredPriceRange[1] } }
+
+                console.log(query);
+
+                data = await ClothingModel.find(query).limit(10);
             } else {
                 data = await ClothingModel.find().limit(10);
             }
