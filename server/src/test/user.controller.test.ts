@@ -6,12 +6,11 @@ import { request, expect } from 'chai';
 
 describe('User Controller', () => {
     const sample_user = {
-        "username": "Alex123",
+        "username": "Alex124",
         "first_name": "Alex",
         "last_name": "S",
         "gender": 'M',
-        "DOB": '2000-04-19T00:00:00.000Z',
-        "email": "alex@email.com"
+        "email": "alex123@email.com"
     };
     describe('Route POST /user/register', () => {
         it('Should create new user in /user/register', async () => {
@@ -20,16 +19,14 @@ describe('User Controller', () => {
                 .send(sample_user);
             expect(res).to.have.status(200);
             expect(res.body).to.be.a('object');
-            console.log(res.body);
         });
     });
 
     describe('Route POST /user/login', () => {
         it('Should POST to /user/login', async () => {
             const res: Response = await request('http://0.0.0.0:8080')
-                .post('/user/login').send({username:"Alex123"});
+                .post('/user/login').send({ username: "Alex123" });
             expect(res).to.have.status(200);
-            console.log(res.body);
             expect(res.body).to.be.a('object');
         });
     });

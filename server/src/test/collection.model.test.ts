@@ -1,5 +1,4 @@
 import { CollectionModel } from "../models/collection.model";
-import {Error, Schema} from "mongoose";
 import { expect } from 'chai';
 
 const sample_collection= new CollectionModel({

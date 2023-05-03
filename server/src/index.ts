@@ -7,19 +7,17 @@ import routes from './routes';
 
 dotenv.config();
 
-
 const PORT = ((process.env.PORT as unknown) as number) || 8080;
 const HOST = process.env.HOST || '0.0.0.0';
 
 const MONGODB_CONNECTION = process.env.MONGODB_CONNECTION;
 
+const app: Express = express();
 
 if (MONGODB_CONNECTION) {
   mongoose
     .connect(`${MONGODB_CONNECTION}`)
     .then(() => {
-      const app: Express = express();
-
       app.use(express.json());
       app.use(cors());
 
@@ -38,3 +36,5 @@ if (MONGODB_CONNECTION) {
 } else {
   console.log("Server connection to MongoDB failed - Missing connection string");
 }
+
+export default app;

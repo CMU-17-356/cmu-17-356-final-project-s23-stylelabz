@@ -14,7 +14,6 @@ describe('Collection Controller', () => {
                 response: "liked"});
             expect(res).to.have.status(200);
             expect(res.body).to.be.a('object');
-            console.log(res.body);
         });
     });
 
@@ -23,7 +22,6 @@ describe('Collection Controller', () => {
             const res: Response = await request('http://0.0.0.0:8080')
                 .get('/collection/'+"644f2887c3c5c09973a40a78");
             expect(res).to.have.status(200);
-            console.log(res.body);
         });
     });
 });

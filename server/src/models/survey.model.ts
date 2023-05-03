@@ -16,9 +16,48 @@ interface SurveyInterface {
 const SurveySchema = new Schema<SurveyInterface>({
     userId: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
     response: {
-        style: [{ type: String, enum: ['Parisian', 'Athleisure', 'Classic', 'Streetwear', 'Business Casual', 'Retro', 'Minimalist', 'Vintage', 'Grunge', 'Chic', 'Boho', 'Preppy', 'Punk', 'Gothic', 'Ethnic'] }],
-        pattern: [{  type: String, enum: ['Solid', 'Floral', 'Spotted', 'Plaid', 'Striped', 'Graphic'] }],
-        color: [{ type: String, enum: ['Red', 'Yellow', 'Green', 'Cyan', 'Blue', 'Purple', 'Brown', 'White', 'Gray', 'Black', 'Multi'] }],
+        style: [{
+            type: String, enum: [
+                'Casual',
+                'Ethnic',
+                'Formal',
+                'NA',
+                'Party',
+                'Smart Casual',
+                'Sports',
+                'Travel'
+            ]
+        }],
+        pattern: [{
+            type: String, enum: [
+                'Checked', 'Colourblocked',
+                'Dyed', 'Embellished',
+                'Lace', 'Patterned',
+                'Printed', 'Satin Finish',
+                'Self Design', 'Solid',
+                'Striped', 'Washed',
+                'Woven Design'
+            ]
+        }],
+        color: [{
+            type: String, enum: [
+                'Beige', 'Black', 'Blue',
+                'Brown', 'Burgundy', 'Charcoal',
+                'Coffee Brown', 'Cream', 'Fluorescent Green',
+                'Gold', 'Green', 'Grey',
+                'Grey Melange', 'Khaki', 'Lavender',
+                'Lime Green', 'Magenta', 'Maroon',
+                'Mauve', 'Multi', 'Mushroom Brown',
+                'Mustard', 'NA', 'Navy Blue',
+                'Nude', 'Off White', 'Olive',
+                'Orange', 'Peach', 'Pink',
+                'Purple', 'Red', 'Rose',
+                'Rust', 'Sea Green', 'Silver',
+                'Skin', 'Tan', 'Taupe',
+                'Teal', 'Turquoise Blue', 'White',
+                'Yellow'
+            ]
+        }],
         price: [Number]
     },
 });
