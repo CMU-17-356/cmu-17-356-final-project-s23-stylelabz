@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
 
 
 // Get collection by ID
-router.get('/:collection_id', async (req, res) => {
+/*router.get('/:collection_id', async (req, res) => {
     try {
         const data = await CollectionModel.findOne({ _id: req.params.collection_id });
         res.json(data);
@@ -34,7 +34,7 @@ router.get('/:collection_id', async (req, res) => {
             res.status(400).json({ message: error.message });
         }
     }
-});
+}); */
 
 // Get all user's collection
 router.get('/:user_id', async (req, res) => {

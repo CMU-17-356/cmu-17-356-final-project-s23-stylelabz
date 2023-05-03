@@ -3,7 +3,6 @@ import chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 import { Response } from 'superagent';
 import { request, expect } from 'chai';
-import {UserModel} from "../models/user.model";
 
 describe('User Controller', () => {
     const sample_user = {
@@ -12,11 +11,12 @@ describe('User Controller', () => {
         "last_name": "S",
         "gender": 'M',
         "DOB": '2000-04-19T00:00:00.000Z',
+        "email": "alex@email.com"
     };
-    describe('Route Post /user', () => {
-        it('Should create new user in /user', async () => {
+    describe('Route POST /user/register', () => {
+        it('Should create new user in /user/register', async () => {
             const res: Response = await request('http://0.0.0.0:8080')
-                .post('/user')
+                .post('/user/register')
                 .send(sample_user);
             expect(res).to.have.status(200);
             expect(res.body).to.be.a('object');
@@ -24,10 +24,10 @@ describe('User Controller', () => {
         });
     });
 
-    describe('Route GET /user/:user_id', () => {
-        it('Should GET to /user/:user_id', async () => {
+    describe('Route POST /user/login', () => {
+        it('Should POST to /user/login', async () => {
             const res: Response = await request('http://0.0.0.0:8080')
-                .get('/user/'+"6450166c5ebb07a844d5854d");
+                .post('/user/login').send({username:"Alex123"});
             expect(res).to.have.status(200);
             console.log(res.body);
             expect(res.body).to.be.a('object');
