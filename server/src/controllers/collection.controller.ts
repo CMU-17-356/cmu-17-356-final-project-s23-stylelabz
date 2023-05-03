@@ -8,12 +8,12 @@ const router = express.Router();
  **************************** */
 // Create user's Collection
 router.post('/', async (req, res) => {
-    const data = new CollectionModel({
-        userId: req.body.userId,
-        clothingId: req.body.clothingId,
-        response: req.body.response,
-    });
     try {
+        const data = new CollectionModel({
+            userId: req.body.userId,
+            clothingId: req.body.clothingId,
+            response: req.body.response,
+        });
         const dataToSave = await data.save();
         res.status(200).json(dataToSave);
     } catch (error) {
@@ -22,7 +22,6 @@ router.post('/', async (req, res) => {
         }
     }
 });
-
 
 // Get collection by ID
 /*router.get('/:collection_id', async (req, res) => {
@@ -42,7 +41,7 @@ router.get('/:user_id', async (req, res) => {
     try {
         const data = await CollectionModel.find({ userId: userId })
             .where('response')
-            .in([ 'liked','superliked']);
+            .in(['liked','superliked']);
         res.json(data);
     } catch (error) {
         if (error instanceof Error) {
