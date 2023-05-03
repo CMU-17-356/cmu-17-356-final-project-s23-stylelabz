@@ -30,8 +30,6 @@ router.get('/', async (req: Request, res: Response) => {
         if (userId) {
             const sr = await SurveyModel.findOne({ userId: userId }).exec();
             if (sr) {
-                console.log('Survey found', sr);
-                // TODO
                 const query: {[k: string]: any} = {};
 
                 const preferredStyles = sr.response.style;
@@ -43,8 +41,6 @@ router.get('/', async (req: Request, res: Response) => {
                 if (preferredPatterns) { query.pattern = { $in: preferredPatterns } }
                 if (preferredColors) { query.color = { $in: preferredColors } }
                 if (preferredPriceRange) { query.price = { $gte: preferredPriceRange[0], $lte: preferredPriceRange[1] } }
-
-                console.log(query);
 
                 data = await ClothingModel.find(query).limit(10);
             } else {

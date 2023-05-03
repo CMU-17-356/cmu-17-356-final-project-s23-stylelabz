@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import { ClothingModel } from '../models/clothing.model';
 import { RecommendationModel } from '../models/recommendation.model';
 import { SwipeModel } from '../models/swipe.model';
+import { SurveyModel } from '../models/survey.model';
 
 const router = express.Router();
 
@@ -33,11 +34,29 @@ router.get('/:userId', async (req: Request, res: Response) => {
             // get first 10 articles by articleId
             const recommendedClothing = await ClothingModel.find({ id: { $in: recommendations.slice(0, 10) }});
             // return
-            console.log("Fetched recommendations", recommendedClothing);
             res.json({ recommendations: recommendedClothing });
         } else {
-            // return empty FOR NOW
-            res.json({ recommendations: [] })
+            let recommendedClothing;
+
+            const sr = await SurveyModel.findOne({ userId: userId }).exec();
+            if (sr) {
+                const query: {[k: string]: any} = {};
+
+                const preferredStyles = sr.response.style;
+                const preferredPatterns = sr.response.pattern;
+                const preferredColors = sr.response.color;
+                const preferredPriceRange = sr.response.price;
+
+                if (preferredStyles) { query.usage = { $in: preferredStyles } }
+                if (preferredPatterns) { query.pattern = { $in: preferredPatterns } }
+                if (preferredColors) { query.color = { $in: preferredColors } }
+                if (preferredPriceRange) { query.price = { $gte: preferredPriceRange[0], $lte: preferredPriceRange[1] } }
+
+                recommendedClothing = await ClothingModel.find(query).limit(10);
+            } else {
+                recommendedClothing = await ClothingModel.find().limit(10);
+            }
+            res.json({ recommendations: recommendedClothing })
         }
     } catch (error) {
         if (error instanceof Error) {
