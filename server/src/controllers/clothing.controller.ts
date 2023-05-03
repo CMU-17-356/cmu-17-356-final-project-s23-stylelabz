@@ -30,7 +30,12 @@ router.get('/', async (req: Request, res: Response) => {
         if (req.query.boundaryId) { boundaryId = req.query.boundaryId }
         if (userId) {
             const sr = await SurveyModel.findOne({ userId: userId }).exec();
-            data = await ClothingModel.find().limit(10);
+            if (sr) {
+                // TODO
+                data = await ClothingModel.find().limit(10);
+            } else {
+                data = await ClothingModel.find().limit(10);
+            }
         } else {
             if (boundaryId) {
                 data = await ClothingModel.find({ _id: { $lt: boundaryId } }).sort({ _id: -1 }).limit(10);
@@ -38,7 +43,10 @@ router.get('/', async (req: Request, res: Response) => {
                 data = await ClothingModel.find().sort({ _id: -1 }).limit(10);
             }
         }
-        res.json(data);
+        res.json({
+            boundaryId: data.slice(-1)[0]._id,
+            results: data 
+        });
     } catch (error) {
         if (error instanceof Error) {
             res.status(400).json({ message: error.message });
