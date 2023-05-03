@@ -12,9 +12,9 @@ export interface SwipeHistory {
 // 2. Create a Schema corresponding to the document interface.
 export const SwipeSchema = new Schema<SwipeHistory>({
     userId: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
-    likes: [{ type: Schema.Types.ObjectId, required: true, ref: 'Article' }],
-    dislikes: [{ type: Schema.Types.ObjectId, required: true, ref: 'Article' }],
-    superlikes: [{ type: Schema.Types.ObjectId, required: true, ref: 'Article' }]
+    likes: [{ type: String }],
+    dislikes: [{ type: String }],
+    superlikes: [{ type: String }]
 });
 
 // 3. Create a Model.
