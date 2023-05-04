@@ -5,9 +5,7 @@ import ButtonComponent from '../components/Button';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../utils/types/types';
 import {useState} from 'react';
-import {Dropdown} from 'react-native-element-dropdown';
-import DatePicker from 'react-native-date-picker';
-import { loginUser, signupUser } from '../api/login';
+import { signupUser } from '../api/login';
 import { UserContext } from '../utils/context';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Registration'>;
@@ -66,9 +64,6 @@ const Registration = (props: Props) => {
       <InputBox onChanged={setEmail} value={email} placeHolder={''} />
       <Text style={styles.registrationText}>Gender</Text>
       <InputBox onChanged={setGender} value={gender} placeHolder={''} />
-
-      {/* <Text style={styles.registrationText}>Date of Birth</Text>
-      <DatePicker date={dob} onDateChange={setDob} /> */}
       <ButtonComponent
         onPressed={signupHandler}
         type="primary"

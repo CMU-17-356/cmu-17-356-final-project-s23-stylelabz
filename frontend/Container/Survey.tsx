@@ -4,11 +4,9 @@ import {Text, View, StyleSheet, ScrollView} from 'react-native';
 import {RootStackParamList} from '../utils/types/types';
 import ButtonComponent from '../components/Button';
 import CheckBox from '@react-native-community/checkbox';
-import {FlatList} from 'react-native-gesture-handler';
 import {Slider} from '@miblanchard/react-native-slider';
 import { saveSurvey } from '../api/survey';
 import { UserContext } from '../utils/context';
-//import InputBox from '../components/Input';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Survey'>;
 const clothingStyles = [
@@ -59,15 +57,12 @@ function SurveyScreen(props: Props) {
     new Array(colors.length).fill(false),
   );
   const [price, setPrice] = React.useState([0, 1000]);
-  const [isValidForm, setIsValidForm] = React.useState(false);
   const context = React.useContext(UserContext);
   const handleChangeClothingStyles = (position: number) => {
     const updatedState = clothingStylesState.map((item, index) =>
       index === position ? !item : item,
     );
     setClothingStylesState(updatedState);
-    // const validForm = isValid();
-    // setIsValidForm(validForm);
   };
 
   const handlePatterns = (position: number) => {
@@ -75,8 +70,6 @@ function SurveyScreen(props: Props) {
       index === position ? !item : item,
     );
     setPatternsState(updatedState);
-    // const validForm = isValid();
-    // setIsValidForm(validForm);
   };
 
   const handleColors = (position: number) => {
@@ -84,8 +77,6 @@ function SurveyScreen(props: Props) {
       index === position ? !item : item,
     );
     setColorsState(updatedState);
-    // const validForm = isValid();
-    // setIsValidForm(validForm);
   };
 
   const handleSurveySubmission = async () => {
@@ -116,7 +107,6 @@ function SurveyScreen(props: Props) {
         price: price
       }
     })
-    console.log(response)
     if(response.status ==200) {
       navigation.reset({
         index: 0,

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, Button, Pressable } from 'react-native';
+import { Text, StyleSheet, Pressable } from 'react-native';
 
 interface ButtonComponentProps {
     type: String,

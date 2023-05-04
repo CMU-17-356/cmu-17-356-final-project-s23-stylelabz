@@ -12,6 +12,7 @@ import { UserContext } from '../utils/context';
 import { fetchClothing } from '../api/clothing';
 import { ClothingItem, Swipe } from '../utils/types/types';
 import { swipe } from '../api/swipe';
+import { fetchRecommendations } from '../api/recommendations';
 
 interface SwipeContainerProps { }
 const { height } = Dimensions.get('window')
@@ -32,19 +33,18 @@ const SwipeContainer = (props: SwipeContainerProps) => {
       setclothinItems(response.data.results);
       setboundaryId(response.data.boundaryId);
     })
-    
-  },[])
-  
-  
+
+  }, [])
+
+
   const swipeLeft = async (index: number) => {
-    console.log(index);
     const clothingItem: ClothingItem = clothinItems[index];
-    if(clothinItems.length-index==2) {
+    if (clothinItems.length - index == 2) {
       fetchMoreCards()
     }
-    const data =  {
+    const data = {
       userId: context.user_id,
-      clothingId: clothingItem._id,
+      clothingId: clothingItem.id,
       swipe: 'dislike'
     }
     const response = await swipe(data);
@@ -53,30 +53,30 @@ const SwipeContainer = (props: SwipeContainerProps) => {
   const swipeRight = async (index: number) => {
     console.log(index);
     const clothingItem: ClothingItem = clothinItems[index];
-    if(clothinItems.length-index==2) {
+    if (clothinItems.length - index == 2) {
       fetchMoreCards()
     }
-    const data =  {
+    const data = {
       userId: context.user_id,
-      clothingId: clothingItem._id,
+      clothingId: clothingItem.id,
       swipe: 'like'
     }
-    const response = await swipe(data);
+    const response: any = await swipe(data);
   }
   const fetchMoreCards = async () => {
-    const response: any = await fetchClothing(
+    const response: any = await fetchRecommendations(
       {
         userId: context.user_id,
         boundaryId: boundaryId
       }
     )
-    const newArr: any = [...clothinItems,...response.data.results]
+    const newArr: any = [...clothinItems, ...response.data.recommendations]
     setclothinItems(newArr);
     setboundaryId(response.data.boundaryId);
     setcardIndex(10);
   }
 
-  
+
   return (
     <View style={styles.container}>
       <Swiper
@@ -84,14 +84,13 @@ const SwipeContainer = (props: SwipeContainerProps) => {
         cards={clothinItems}
         cardIndex={cardIndex}
         renderCard={(card: any) => {
-          
-          return card? (
-            <OutfitCard style={styles.card} data={card} key={card._id}/>
-          ): null
+
+          return card ? (
+            <OutfitCard style={styles.card} data={card} key={card._id} />
+          ) : null
         }}
         onSwipedLeft={swipeLeft}
         onSwipedRight={swipeRight}
-        // onSwiped={(cardIndex) => { console.log(cardIndex) }}
         onSwipedAll={fetchMoreCards}
         verticalSwipe={false}
         backgroundColor={'#fff'}
@@ -128,7 +127,7 @@ const SwipeContainer = (props: SwipeContainerProps) => {
                 flexDirection: 'column',
                 alignItems: 'flex-start',
                 justifyContent: 'flex-start',
-                
+
               }
             }
           }

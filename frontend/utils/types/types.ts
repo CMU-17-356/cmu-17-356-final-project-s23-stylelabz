@@ -1,9 +1,3 @@
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import type { NativeStackScreenProps } from '@react-navigation/native-stack';
-
-
-
-// const Stack = createNativeStackNavigator();
 export type RootStackParamList = {
   Registration: undefined;
   Home: undefined;
@@ -12,6 +6,7 @@ export type RootStackParamList = {
   Login: undefined;
   Collection: undefined;
   Analytics: undefined;
+  CollectionItem: undefined;
 };
 
 export type UserData  = {

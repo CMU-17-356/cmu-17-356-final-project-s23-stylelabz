@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { serverUrl } from '../utils/constants';
-import { SurveyResponse, Swipe } from '../utils/types/types';
+import { Swipe } from '../utils/types/types';
 
 export async function  swipe (data: Swipe) {
     try{

@@ -2,10 +2,10 @@ import axios from 'axios';
 import { serverUrl } from '../utils/constants';
 import { Clothing } from '../utils/types/types';
 
-export async function  fetchClothing (data: Clothing) {
+export async function  fetchRecommendations (data: Clothing) {
     try{
         const response = await axios.get(
-            `${serverUrl}/clothing`,
+            `${serverUrl}/recommendation`,
             {params: data}
         );
         return response;

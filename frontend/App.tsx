@@ -9,9 +9,7 @@ import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StyleSheet, useColorScheme } from 'react-native';
-
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import HomeScreen from './Container/HomeScreen';
 import Registration from './Container/Registration';
 import { RootStackParamList } from './utils/types/types';
@@ -19,8 +17,8 @@ import SurveyScreen from './Container/Survey';
 import UserHome from './Container/UserHome';
 import Login from './Container/Login'
 import Collection from './Container/Collection';
-import Analytics from './Container/Analytics';
 import { UserContext } from './utils/context';
+import CollectionItem from './Container/CollectionItemContainer';
 
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
@@ -62,9 +60,8 @@ function App(): JSX.Element {
           <RootStack.Screen name="Survey" component={SurveyScreen} />
           <RootStack.Screen name="Login" component={Login} />
           <RootStack.Screen name="Collection" component={Collection} />
-          <RootStack.Screen name="Analytics" component={Analytics} />
           <RootStack.Screen name="UserHome" component={UserHome} options={{ headerShown: false }} />
-
+          <RootStack.Screen name="CollectionItem" component={CollectionItem} />
         </RootStack.Navigator>
       </NavigationContainer>
     </UserContext.Provider>

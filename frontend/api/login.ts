@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { serverUrl } from '../utils/constants';
-import { LoginData, UserData } from '../utils/types/types';
+import { UserData } from '../utils/types/types';
 
 export async function  signupUser (data: UserData) {
     console.log(`${serverUrl}/user/register`, data)
