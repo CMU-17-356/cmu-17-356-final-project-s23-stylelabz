@@ -47,7 +47,7 @@ router.post('/', async (req, res) => {
             }
 
             SwipeModel
-                .updateOne({ userId: userId }, update)
+                .updateOne({ userId: userId }, update, { upsert: true })
                 .then(() => res.sendStatus(200))
                 .catch(() => res.sendStatus(500));
 
