@@ -1,12 +1,34 @@
 import express from 'express';
 import { SwipeModel } from '../models/swipe.model';
+import { ClothingModel } from '../models/clothing.model';
 
 const router = express.Router();
 
 /******************************
- * Collection APIs
+ * Swipe APIs
  **************************** */
-// Create user's Collection
+router.get('/:userId', async (req, res) => {
+    try {
+        if (req.params.userId) {
+            const userId = req.body.userId;
+            const swipes = await SwipeModel.findOne({ userId: userId }).exec();
+            if (swipes?.likes) {
+                const likedClothingIds = swipes.likes;
+                const likedClothing = await ClothingModel.find({ id: { $in: likedClothingIds }});
+                res.json({ results: likedClothing });
+            } else {
+                res.json({ results: [] });
+            }
+        } else {
+            res.status(400).json({ message: 'Bad Request' });
+        }
+    } catch (error) {
+        if (error instanceof Error) {
+            res.status(400).json({ message: error.message });
+        }
+    }
+});
+
 router.post('/', async (req, res) => {
     try {
         if (req.body.userId && req.body.clothingId && req.body.swipe) {
