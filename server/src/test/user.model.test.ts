@@ -6,7 +6,6 @@ const sample_user = new UserModel({
     first_name: "Alex",
     last_name: "S",
     gender: 'M',
-    DOB: '2000-04-19T00:00:00.000Z',
 });
 
 // Test if object should have username
