@@ -5,55 +5,24 @@
  * @format
  */
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import React, { useState } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { StyleSheet, useColorScheme } from 'react-native';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+import HomeScreen from './Container/HomeScreen';
+import Registration from './Container/Registration';
+import { RootStackParamList } from './utils/types/types';
+import SurveyScreen from './Container/Survey';
+import UserHome from './Container/UserHome';
+import Login from './Container/Login'
+import Collection from './Container/Collection';
+import { UserContext } from './utils/context';
+import CollectionItem from './Container/CollectionItemContainer';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+const RootStack = createNativeStackNavigator<RootStackParamList>();
 
-function Section({children, title}: SectionProps): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -62,57 +31,43 @@ function App(): JSX.Element {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
+  const context1InitialState = {
+    user_id: ''
+  };
+  const [userInfo, setUserInfo] = useState(context1InitialState);
+  function setUserId(user_id: string) {
+    const newState = {user_id};
+    setUserInfo(newState);
+  }
+
+  const userContextSetters = {
+    setUserId
+  }
+
+
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <UserContext.Provider value={{
+      ...userInfo, ...userContextSetters
+    }}>
+      <NavigationContainer>
+        <RootStack.Navigator>
+          <RootStack.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{ title: 'Welcome' }}
+          />
+          <RootStack.Screen name="Registration" component={Registration} />
+          <RootStack.Screen name="Survey" component={SurveyScreen} />
+          <RootStack.Screen name="Login" component={Login} />
+          <RootStack.Screen name="Collection" component={Collection} />
+          <RootStack.Screen name="UserHome" component={UserHome} options={{ headerShown: false }} />
+          <RootStack.Screen name="CollectionItem" component={CollectionItem} />
+        </RootStack.Navigator>
+      </NavigationContainer>
+    </UserContext.Provider>
   );
 }
 
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
+const styles = StyleSheet.create({});
 
 export default App;
