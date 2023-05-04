@@ -10,7 +10,7 @@ const router = express.Router();
 router.get('/:userId', async (req, res) => {
     try {
         if (req.params.userId) {
-            const userId = req.body.userId;
+            const userId = req.params.userId;
             const swipes = await SwipeModel.findOne({ userId: userId }).exec();
             if (swipes) {
                 const likedClothingIds = swipes.likes;
