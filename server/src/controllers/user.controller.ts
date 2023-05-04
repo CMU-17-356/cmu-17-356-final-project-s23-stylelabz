@@ -9,8 +9,12 @@ const router = express.Router();
 // Login
 router.post('/login', async (req, res) => {
     try {
-        const data = await UserModel.findOne({ username: req.body.username });
-        res.json(data);
+        const user = await UserModel.findOne({ username: req.body.username });
+        if (user) {
+            res.json(user);
+        } else {
+            res.status(400).json({ message: 'Bad Request' });
+        }
     } catch (error) {
         if (error instanceof Error) {
             res.status(400).json({ message: error.message });

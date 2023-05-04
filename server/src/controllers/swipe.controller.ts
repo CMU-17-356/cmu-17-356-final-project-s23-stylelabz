@@ -12,7 +12,7 @@ router.get('/:userId', async (req, res) => {
         if (req.params.userId) {
             const userId = req.body.userId;
             const swipes = await SwipeModel.findOne({ userId: userId }).exec();
-            if (swipes?.likes) {
+            if (swipes) {
                 const likedClothingIds = swipes.likes;
                 const likedClothing = await ClothingModel.find({ id: { $in: likedClothingIds }});
                 res.json({ results: likedClothing });
