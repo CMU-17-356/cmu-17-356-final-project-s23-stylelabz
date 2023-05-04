@@ -1,22 +1,22 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, TextInput } from 'react-native';
+import { View, StyleSheet, TextInput } from 'react-native';
 
 interface InputBoxProps {
-    onChanged: React.Dispatch<React.SetStateAction<string>>,
-    value: string,
-    placeHolder: string
+  onChanged: React.Dispatch<React.SetStateAction<string>>,
+  value: string,
+  placeHolder: string
 }
 
 const InputBox = (props: InputBoxProps) => {
-    const {onChanged, value, placeHolder} = props;
+  const { onChanged, value, placeHolder } = props;
   return (
     <View style={styles.container}>
-      <TextInput 
+      <TextInput
         placeholder={placeHolder}
-        style = {styles.input}
+        style={styles.input}
         onChangeText={(onChanged)}
         value={value}
-    />
+      />
     </View>
   );
 };

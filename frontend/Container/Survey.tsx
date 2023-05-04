@@ -4,42 +4,46 @@ import {Text, View, StyleSheet, ScrollView} from 'react-native';
 import {RootStackParamList} from '../utils/types/types';
 import ButtonComponent from '../components/Button';
 import CheckBox from '@react-native-community/checkbox';
-import {FlatList} from 'react-native-gesture-handler';
 import {Slider} from '@miblanchard/react-native-slider';
-//import InputBox from '../components/Input';
+import { saveSurvey } from '../api/survey';
+import { UserContext } from '../utils/context';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Survey'>;
 const clothingStyles = [
-  'Parisian',
-  'Athleisure',
-  'Classic',
-  'Streetwear',
-  'Business-Casual',
-  'Retro',
-  'Minimialist',
-  'Vintage',
-  'Grunge',
-  'Chic',
-  'Boho',
-  'Preppy',
-  'Punk',
-  'Gothic',
+  'Casual',
   'Ethnic',
-  'Kawaii',
+  'Formal',
+  'NA',
+  'Party',
+  'Smart Casual',
+  'Sports',
+  'Travel'
 ];
-const patterns = ['Solid', 'Floral', 'Spotted', 'Plaid', 'Striped', 'Graphic'];
+const patterns = [
+  'Checked', 'Colourblocked',
+  'Dyed', 'Embellished',
+  'Lace', 'Patterned',
+  'Printed', 'Satin Finish',
+  'Self Design', 'Solid',
+  'Striped', 'Washed',
+  'Woven Design'
+];
 const colors = [
-  'Red',
-  'Yellow',
-  'Green',
-  'Cyan',
-  'Blue',
-  'Purple',
-  'Brown',
-  'White',
-  'Gray',
-  'Black',
-  'Multi',
+  'Beige', 'Black', 'Blue',
+  'Brown', 'Burgundy', 'Charcoal',
+  'Coffee Brown', 'Cream', 'Fluorescent Green',
+  'Gold', 'Green', 'Grey',
+  'Grey Melange', 'Khaki', 'Lavender',
+  'Lime Green', 'Magenta', 'Maroon',
+  'Mauve', 'Multi', 'Mushroom Brown',
+  'Mustard', 'NA', 'Navy Blue',
+  'Nude', 'Off White', 'Olive',
+  'Orange', 'Peach', 'Pink',
+  'Purple', 'Red', 'Rose',
+  'Rust', 'Sea Green', 'Silver',
+  'Skin', 'Tan', 'Taupe',
+  'Teal', 'Turquoise Blue', 'White',
+  'Yellow'
 ];
 function SurveyScreen(props: Props) {
   const {navigation} = props;
@@ -53,7 +57,7 @@ function SurveyScreen(props: Props) {
     new Array(colors.length).fill(false),
   );
   const [price, setPrice] = React.useState([0, 1000]);
-
+  const context = React.useContext(UserContext);
   const handleChangeClothingStyles = (position: number) => {
     const updatedState = clothingStylesState.map((item, index) =>
       index === position ? !item : item,
@@ -74,6 +78,42 @@ function SurveyScreen(props: Props) {
     );
     setColorsState(updatedState);
   };
+
+  const handleSurveySubmission = async () => {
+    let clothingStylesSelected: string[] = [];
+    clothingStylesState.forEach((item, index) => {
+      if(item) {
+        clothingStylesSelected.push(clothingStyles[index])
+      }
+    })
+    let patternsSelected: string[] = [];
+    patternsState.forEach((item, index) => {
+      if(item) {
+        patternsSelected.push(patterns[index])
+      }
+    })
+    let colorSelected: string[] = [];
+    colorsState.forEach((item, index) => {
+      if(item) {
+        colorSelected.push(colors[index])
+      }
+    })
+    const response: any = await saveSurvey({
+      userId: context.user_id,
+      response: {
+        color: colorSelected,
+        pattern: patternsSelected,
+        style: clothingStylesSelected,
+        price: price
+      }
+    })
+    if(response.status ==200) {
+      navigation.reset({
+        index: 0,
+        routes: [{name: 'UserHome'}],
+      });
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -141,12 +181,8 @@ function SurveyScreen(props: Props) {
         <ButtonComponent
           type="primary"
           text="Submit"
-          onPressed={() => {
-            navigation.reset({
-              index: 0,
-              routes: [{name: 'UserHome'}],
-            });
-          }}
+          onPressed={handleSurveySubmission}
+          disable={!(clothingStylesState.includes(true) && patternsState.includes(true) && colorsState.includes(true))}
         />
       </ScrollView>
     </View>
