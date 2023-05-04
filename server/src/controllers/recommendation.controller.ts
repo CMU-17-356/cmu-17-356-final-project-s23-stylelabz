@@ -16,6 +16,9 @@ router.get('/:userId', async (req: Request, res: Response) => {
         // extract userId
         const userId = req.params.userId;
 
+        let boundaryId;
+        if (req.query.boundaryId) { boundaryId = req.query.boundaryId; console.log('Boundary Id', boundaryId) }
+
         // get swipes by userId
         const userSwipes = await SwipeModel.findOne({ userId: userId }).exec();
         
@@ -32,7 +35,13 @@ router.get('/:userId', async (req: Request, res: Response) => {
             // deduplicate recommendations
             recommendations = Array.from(new Set(recommendations));
             // get first 10 articles by articleId
-            const recommendedClothing = await ClothingModel.find({ id: { $in: recommendations.slice(0, 10) }});
+            let recommendedClothing;
+
+            if (boundaryId) {
+                recommendedClothing = await ClothingModel.find({ _id: { $lt: boundaryId }, id: { $in: recommendations }}).sort({ _id: -1 }).limit(10);
+            } else {
+                recommendedClothing = await ClothingModel.find({ id: { $in: recommendations }}).limit(10);
+            }
             // return
             res.json({ recommendations: recommendedClothing });
         } else {
@@ -52,9 +61,16 @@ router.get('/:userId', async (req: Request, res: Response) => {
                 if (preferredColors) { query.color = { $in: preferredColors } }
                 if (preferredPriceRange) { query.price = { $gte: preferredPriceRange[0], $lte: preferredPriceRange[1] } }
 
+                if (boundaryId) { query._id = { $lt: boundaryId } }
+
                 recommendedClothing = await ClothingModel.find(query).limit(10);
             } else {
-                recommendedClothing = await ClothingModel.find().limit(10);
+                console.log(boundaryId)
+                if (boundaryId) {
+                    recommendedClothing = await ClothingModel.find({ _id: { $lt: boundaryId } }).limit(10);
+                } else {
+                    recommendedClothing = await ClothingModel.find().limit(10);
+                }
             }
             res.json({ recommendations: recommendedClothing })
         }
