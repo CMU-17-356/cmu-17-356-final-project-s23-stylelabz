@@ -8,39 +8,92 @@ import OutfitCard from '../components/OutfitCard';
 import SwipeOverlay from '../components/SwipeOverlay';
 import { ColorSpace } from 'react-native-reanimated';
 import clothingData from '../utils/mockData';
+import { UserContext } from '../utils/context';
+import { fetchClothing } from '../api/clothing';
+import { ClothingItem, Swipe } from '../utils/types/types';
+import { swipe } from '../api/swipe';
 
 interface SwipeContainerProps { }
 const { height } = Dimensions.get('window')
 const demoContent = clothingData
 const SwipeContainer = (props: SwipeContainerProps) => {
   const useSwiper = useRef(null).current;
-
-  const swipeLeft = () => {
-
+  const context = React.useContext(UserContext);
+  const [clothinItems, setclothinItems] = useState([]);
+  const [boundaryId, setboundaryId] = useState('');
+  const [cardIndex, setcardIndex] = useState(0);
+  React.useEffect(() => {
+    fetchClothing(
+      {
+        userId: context.user_id,
+        boundaryId: null
+      }
+    ).then((response: any) => {
+      setclothinItems(response.data.results);
+      setboundaryId(response.data.boundaryId);
+    })
+    
+  },[])
+  
+  
+  const swipeLeft = async (index: number) => {
+    console.log(index);
+    const clothingItem: ClothingItem = clothinItems[index];
+    if(clothinItems.length-index==2) {
+      fetchMoreCards()
+    }
+    const data =  {
+      userId: context.user_id,
+      clothingId: clothingItem._id,
+      swipe: 'dislike'
+    }
+    const response = await swipe(data);
   }
 
-  const swipeRight = () => {
-
+  const swipeRight = async (index: number) => {
+    console.log(index);
+    const clothingItem: ClothingItem = clothinItems[index];
+    if(clothinItems.length-index==2) {
+      fetchMoreCards()
+    }
+    const data =  {
+      userId: context.user_id,
+      clothingId: clothingItem._id,
+      swipe: 'like'
+    }
+    const response = await swipe(data);
   }
-  const fetchMoreCards = () => {
-
+  const fetchMoreCards = async () => {
+    const response: any = await fetchClothing(
+      {
+        userId: context.user_id,
+        boundaryId: boundaryId
+      }
+    )
+    const newArr: any = [...clothinItems,...response.data.results]
+    setclothinItems(newArr);
+    setboundaryId(response.data.boundaryId);
+    setcardIndex(10);
   }
+
+  
   return (
     <View style={styles.container}>
       <Swiper
         ref={useSwiper}
-        cards={demoContent}
-        renderCard={(card) => {
-          return (
-            <OutfitCard style={styles.card} data={card}/>
-          )
+        cards={clothinItems}
+        cardIndex={cardIndex}
+        renderCard={(card: any) => {
+          
+          return card? (
+            <OutfitCard style={styles.card} data={card} key={card._id}/>
+          ): null
         }}
         onSwipedLeft={swipeLeft}
         onSwipedRight={swipeRight}
         // onSwiped={(cardIndex) => { console.log(cardIndex) }}
         onSwipedAll={fetchMoreCards}
         verticalSwipe={false}
-        cardIndex={0}
         backgroundColor={'#fff'}
         stackSize={3}
         overlayLabels={

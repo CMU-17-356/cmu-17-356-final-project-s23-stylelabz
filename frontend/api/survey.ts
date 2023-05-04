@@ -5,7 +5,7 @@ import { SurveyResponse } from '../utils/types/types';
 export async function  saveSurvey (data: SurveyResponse) {
     try{
         const response = await axios.post(
-            `${serverUrl}/SurveyResponse`,
+            `${serverUrl}/survey`,
             data
         );
         return response;

@@ -12,36 +12,40 @@ import { UserContext } from '../utils/context';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Survey'>;
 const clothingStyles = [
-  'Parisian',
-  'Athleisure',
-  'Classic',
-  'Streetwear',
-  'Business-Casual',
-  'Retro',
-  'Minimialist',
-  'Vintage',
-  'Grunge',
-  'Chic',
-  'Boho',
-  'Preppy',
-  'Punk',
-  'Gothic',
+  'Casual',
   'Ethnic',
-  'Kawaii',
+  'Formal',
+  'NA',
+  'Party',
+  'Smart Casual',
+  'Sports',
+  'Travel'
 ];
-const patterns = ['Solid', 'Floral', 'Spotted', 'Plaid', 'Striped', 'Graphic'];
+const patterns = [
+  'Checked', 'Colourblocked',
+  'Dyed', 'Embellished',
+  'Lace', 'Patterned',
+  'Printed', 'Satin Finish',
+  'Self Design', 'Solid',
+  'Striped', 'Washed',
+  'Woven Design'
+];
 const colors = [
-  'Red',
-  'Yellow',
-  'Green',
-  'Cyan',
-  'Blue',
-  'Purple',
-  'Brown',
-  'White',
-  'Gray',
-  'Black',
-  'Multi',
+  'Beige', 'Black', 'Blue',
+  'Brown', 'Burgundy', 'Charcoal',
+  'Coffee Brown', 'Cream', 'Fluorescent Green',
+  'Gold', 'Green', 'Grey',
+  'Grey Melange', 'Khaki', 'Lavender',
+  'Lime Green', 'Magenta', 'Maroon',
+  'Mauve', 'Multi', 'Mushroom Brown',
+  'Mustard', 'NA', 'Navy Blue',
+  'Nude', 'Off White', 'Olive',
+  'Orange', 'Peach', 'Pink',
+  'Purple', 'Red', 'Rose',
+  'Rust', 'Sea Green', 'Silver',
+  'Skin', 'Tan', 'Taupe',
+  'Teal', 'Turquoise Blue', 'White',
+  'Yellow'
 ];
 function SurveyScreen(props: Props) {
   const {navigation} = props;
@@ -62,8 +66,8 @@ function SurveyScreen(props: Props) {
       index === position ? !item : item,
     );
     setClothingStylesState(updatedState);
-    const validForm = isValid();
-    setIsValidForm(validForm);
+    // const validForm = isValid();
+    // setIsValidForm(validForm);
   };
 
   const handlePatterns = (position: number) => {
@@ -71,9 +75,8 @@ function SurveyScreen(props: Props) {
       index === position ? !item : item,
     );
     setPatternsState(updatedState);
-    setClothingStylesState(updatedState);
-    const validForm = isValid();
-    setIsValidForm(validForm);
+    // const validForm = isValid();
+    // setIsValidForm(validForm);
   };
 
   const handleColors = (position: number) => {
@@ -81,9 +84,8 @@ function SurveyScreen(props: Props) {
       index === position ? !item : item,
     );
     setColorsState(updatedState);
-    setClothingStylesState(updatedState);
-    const validForm = isValid();
-    setIsValidForm(validForm);
+    // const validForm = isValid();
+    // setIsValidForm(validForm);
   };
 
   const handleSurveySubmission = async () => {
@@ -106,7 +108,7 @@ function SurveyScreen(props: Props) {
       }
     })
     const response: any = await saveSurvey({
-      user_id: context.user_id,
+      userId: context.user_id,
       response: {
         color: colorSelected,
         pattern: patternsSelected,
@@ -114,35 +116,13 @@ function SurveyScreen(props: Props) {
         price: price
       }
     })
+    console.log(response)
     if(response.status ==200) {
       navigation.reset({
         index: 0,
         routes: [{name: 'UserHome'}],
       });
     }
-  }
-
-  const isValid = () => {
-    let isClothingStyle = false;
-    clothingStylesState.forEach((item) => {
-      console.log(item)
-      if(item) {
-        isClothingStyle = true;
-      }
-    });
-    let isPattern = false;
-    patternsState.forEach((item) => {
-      if(item) {
-        isPattern = true;
-      }
-    })
-    let isColor = false;
-    colorsState.forEach((item) => {
-      if(item) {
-        isColor = true;
-      }
-    })
-    return isClothingStyle && isPattern && isColor;
   }
 
   return (
@@ -211,13 +191,8 @@ function SurveyScreen(props: Props) {
         <ButtonComponent
           type="primary"
           text="Submit"
-          onPressed={() => {
-            navigation.reset({
-              index: 0,
-              routes: [{name: 'UserHome'}],
-            });
-          }}
-          disable={!isValidForm}
+          onPressed={handleSurveySubmission}
+          disable={!(clothingStylesState.includes(true) && patternsState.includes(true) && colorsState.includes(true))}
         />
       </ScrollView>
     </View>

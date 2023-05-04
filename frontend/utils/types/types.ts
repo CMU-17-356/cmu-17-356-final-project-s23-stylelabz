@@ -28,7 +28,7 @@ export type LoginData = {
 }
 
 export type SurveyResponse = {
-  user_id: string,
+  userId: string,
   response: {
     style: string[],
     pattern: string[],
@@ -37,10 +37,34 @@ export type SurveyResponse = {
   }
 }
 
+export type Clothing = {
+  userId: string,
+  boundaryId?: string | null
+}
+
 export type Swipe = {
-  user_id: string,
-  clothing_id: string,
-  swipe: string[]
+  userId: string,
+  clothingId: string,
+  swipe: string
+}
+
+export type ClothingItem = {
+    _id: string,
+    ageGroup: string,
+    brand: string,
+    category: string,
+    color: string,
+    description: string,
+    fabric: string,
+    gender: string,
+    id: string,
+    imgLink: string,
+    name: string,
+    price: 20.388,
+    season: string,
+    type: string,
+    usage: string,
+    variantName: string
 }
 
 

@@ -18,9 +18,9 @@ const Login = (props: Props) => {
     const [errors, seterrors] = useState('');
     const loginUserHandler = async () => {
         if (userName.length > 1){
-            const response = await loginUser(userName);
+            const response: any = await loginUser(userName);
             if(response) {
-                context.setUserId(response as string)
+                context.setUserId(response.data._id)
                 navigation.reset({
                     index: 0,
                     routes: [{name: 'UserHome'}]

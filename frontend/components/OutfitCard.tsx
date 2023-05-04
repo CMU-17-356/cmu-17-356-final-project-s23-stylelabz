@@ -1,20 +1,26 @@
 import * as React from 'react';
 import { Text, View, StyleSheet, Image, Dimensions } from 'react-native';
-import { Clothing } from '../utils/types/interface';
 import { Link } from '@react-navigation/native';
+import { ClothingItem } from '../utils/types/types';
 
 interface OutfitCardProps {
   style: {},
-  data: Clothing
+  data: ClothingItem
 }
 const { height } = Dimensions.get('window')
 const OutfitCard = (props: OutfitCardProps) => {
   const {data, style} = props
+  // console.log(data, "rerender")
   return (
-    <View style={style}>
-      <Image source={require('../assets/o1.jpeg')} style={styles.image} resizeMode='contain'/>
-      <Text>OutfitCard 2..............</Text>
-    </View>
+    
+      data ? 
+      <View style={style}>
+    {data.imgLink? <Image source={{uri: data.imgLink}} style={styles.image} resizeMode='contain'/>: <Text>No image</Text>}
+    <Text>{data.ageGroup}</Text>
+    <Text>$ {data.price}</Text>
+    <Text>{data.brand}</Text>
+  </View>: <Text>Loading</Text>
+    
   );
 };
 

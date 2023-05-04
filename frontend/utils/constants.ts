@@ -1,1 +1,1 @@
-export const serverUrl = 'https://stylelabz-server.fly.dev/'
+export const serverUrl = 'https://stylelabz-server.fly.dev'

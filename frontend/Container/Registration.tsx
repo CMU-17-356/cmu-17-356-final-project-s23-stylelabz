@@ -30,20 +30,20 @@ const Registration = (props: Props) => {
   const context = React.useContext(UserContext);
   const signupHandler = async () => {
     if (userName.length > 1){
-      const response = await signupUser({
+      const response: any = await signupUser({
         username: userName,
         first_name: firstName,
         last_name: lastName,
         email: email,
         gender: gender
       });
-        if(response) {
-            context.setUserId(response as string)
-            navigation.reset({
-              index: 0,
-              routes: [{name: 'Survey'}],
-            });
-        }
+      if(response.status == 200) {
+          context.setUserId(response.data._id)
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Survey'}],
+          });
+      }
     }
     else{
         seterrors("your username needs to exist")
@@ -73,6 +73,7 @@ const Registration = (props: Props) => {
         onPressed={signupHandler}
         type="primary"
         text="Submit"
+        disable={!(userName.length && firstName.length && lastName.length && email.length && (gender=='M' || gender=='F'))}
       />
     </View>
   );
